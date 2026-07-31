@@ -83,9 +83,9 @@ export function ReportView({
             <div style={{ height: 240 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData} outerRadius="75%">
-                  <PolarGrid stroke="#2a356b" />
-                  <PolarAngleAxis dataKey="metric" tick={{ fill: "#97a1c9", fontSize: 10 }} />
-                  <Radar dataKey="value" stroke="#6c8cff" fill="#6c8cff" fillOpacity={0.35} />
+                  <PolarGrid stroke="#e7e9f5" />
+                  <PolarAngleAxis dataKey="metric" tick={{ fill: "#737a95", fontSize: 10 }} />
+                  <Radar dataKey="value" stroke="#6366f1" fill="#a855f7" fillOpacity={0.28} />
                 </RadarChart>
               </ResponsiveContainer>
             </div>

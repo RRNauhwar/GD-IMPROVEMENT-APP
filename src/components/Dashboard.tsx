@@ -108,14 +108,14 @@ export function Dashboard({
         <div style={{ height: 280 }} className="mt">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ top: 10, right: 16, bottom: 0, left: -16 }}>
-              <CartesianGrid stroke="#233066" strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fill: "#97a1c9", fontSize: 12 }} />
-              <YAxis tick={{ fill: "#97a1c9", fontSize: 12 }} domain={metric === "wpm" ? [0, "auto"] : [0, 100]} />
+              <CartesianGrid stroke="#e7e9f5" strokeDasharray="3 3" />
+              <XAxis dataKey="name" tick={{ fill: "#737a95", fontSize: 12 }} />
+              <YAxis tick={{ fill: "#737a95", fontSize: 12 }} domain={metric === "wpm" ? [0, "auto"] : [0, 100]} />
               <Tooltip
-                contentStyle={{ background: "#161e3d", border: "1px solid #263166", borderRadius: 10 }}
-                labelStyle={{ color: "#e8ecff" }}
+                contentStyle={{ background: "#ffffff", border: "1px solid #e7e9f5", borderRadius: 10 }}
+                labelStyle={{ color: "#171a2e" }}
               />
-              <Line type="monotone" dataKey="value" stroke="#6c8cff" strokeWidth={3} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} dot={{ r: 4, fill: "#6366f1" }} activeDot={{ r: 6 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
