@@ -1,0 +1,2129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpeakX AI / GD-IMPROVEMENT-APP — Engineering &amp; Interview Handbook</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+    <style>
+      :root {
+        --ink: #1f2430;
+        --muted: #5b6472;
+        --line: #e3e6ef;
+        --brand: #6366f1;
+        --brand2: #a855f7;
+        --brand3: #d946ef;
+        --good: #0e9f6e;
+        --warn: #b45309;
+        --bad: #c81e1e;
+        --code-bg: #f6f8fa;
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body {
+        font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+        color: var(--ink);
+        font-size: 12.3px;
+        line-height: 1.58;
+        margin: 0;
+      }
+      h1, h2, h3, h4 { line-height: 1.22; break-after: avoid; }
+      h1 { font-size: 25px; margin: 0 0 10px; letter-spacing: -0.01em; }
+      h2 { font-size: 19px; margin: 22px 0 8px; }
+      h3 { font-size: 15.5px; margin: 18px 0 6px; color: #2b3140; }
+      h4 { font-size: 13.5px; margin: 14px 0 5px; color: #3a4150; }
+      p { margin: 7px 0; }
+      ul, ol { margin: 7px 0; padding-left: 22px; }
+      li { margin: 3px 0; }
+      a { color: var(--brand); text-decoration: none; }
+      code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
+      p code, li code, td code {
+        background: var(--code-bg); border: 1px solid var(--line);
+        border-radius: 4px; padding: 0.5px 4px; font-size: 10.8px; color: #b02a6f;
+      }
+      pre {
+        background: var(--code-bg); border: 1px solid var(--line);
+        border-radius: 8px; padding: 11px 13px; overflow-x: auto;
+        font-size: 10.6px; line-height: 1.5; break-inside: avoid; margin: 9px 0;
+      }
+      pre code { background: none; border: none; padding: 0; color: #24292e; }
+      table {
+        width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 11px;
+        break-inside: auto;
+      }
+      th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+      th { background: #f1f2f8; font-weight: 600; }
+      tbody tr:nth-child(even) { background: #fafbfe; }
+      tr { break-inside: avoid; }
+
+      /* Section headers with gradient number badge */
+      .section { break-before: page; padding-top: 4px; }
+      .section > h1 { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid var(--line); padding-bottom: 10px; }
+      .section > h1 .badge {
+        flex: 0 0 auto; display: inline-grid; place-items: center;
+        width: 40px; height: 40px; border-radius: 11px; color: #fff; font-size: 17px; font-weight: 800;
+        background: linear-gradient(135deg, var(--brand), var(--brand2) 55%, var(--brand3));
+      }
+
+      /* Callouts */
+      .callout { border-radius: 8px; padding: 10px 13px; margin: 11px 0; border: 1px solid var(--line); border-left-width: 4px; break-inside: avoid; }
+      .callout p:first-child { margin-top: 0; }
+      .callout p:last-child { margin-bottom: 0; }
+      .callout.missing { border-left-color: var(--bad); background: #fdf2f2; }
+      .callout.warn { border-left-color: var(--warn); background: #fffaf0; }
+      .callout.tip { border-left-color: var(--good); background: #f2fbf6; }
+      .callout.note { border-left-color: var(--brand); background: #f5f5ff; }
+      .tag { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; vertical-align: middle; }
+      .tag.missing { background: #fbe0e0; color: var(--bad); }
+      .tag.exists { background: #d9f3e6; color: var(--good); }
+      .tag.partial { background: #fdeccb; color: var(--warn); }
+
+      .mermaid { text-align: center; margin: 12px 0; break-inside: avoid; }
+      .mermaid svg { max-width: 100% !important; height: auto !important; }
+
+      .fig-cap { text-align: center; color: var(--muted); font-size: 10px; margin: 2px 0 14px; font-style: italic; }
+
+      /* Difficulty pills for interview Qs */
+      .lvl { font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 4px; color: #fff; margin-left: 6px; vertical-align: middle; }
+      .lvl.easy { background: #16a34a; }
+      .lvl.medium { background: #2563eb; }
+      .lvl.hard { background: #d97706; }
+      .lvl.expert { background: #9333ea; }
+      .lvl.staff { background: #be123c; }
+      .lvl.principal { background: #0f172a; }
+
+      .qa { break-inside: avoid; border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; margin: 9px 0; }
+      .qa .q { font-weight: 700; color: #111827; }
+      .qa .why { color: var(--muted); font-size: 10.6px; margin: 4px 0; }
+      .qa .a { margin: 5px 0; }
+      .qa .fu { font-size: 10.6px; color: #374151; }
+
+      /* Cover */
+      .cover { break-after: page; height: 265mm; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        background: linear-gradient(150deg, #eef0ff, #faf0ff 60%, #fdeefb); border-radius: 16px; padding: 30px; }
+      .cover .logo { width: 92px; height: 92px; border-radius: 26px; display: grid; place-items: center; color: #fff; font-size: 52px; font-weight: 800;
+        background: linear-gradient(135deg, var(--brand), var(--brand2) 55%, var(--brand3)); box-shadow: 0 20px 50px rgba(124,58,237,.35); margin-bottom: 22px; }
+      .cover h1 { font-size: 40px; margin: 6px 0; background: linear-gradient(120deg, var(--brand), var(--brand3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .cover .sub { font-size: 16px; color: #444; max-width: 620px; }
+      .cover .meta { margin-top: 26px; color: var(--muted); font-size: 12px; }
+      .cover .chips { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+      .cover .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; font-size: 11px; font-weight: 600; color: #4b5563; }
+
+      /* TOC */
+      .toc { break-after: page; }
+      .toc h1 { border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+      .toc ol { list-style: none; padding-left: 0; counter-reset: toc; }
+      .toc > ol > li { counter-increment: toc; padding: 4px 0; border-bottom: 1px dotted var(--line); font-weight: 600; }
+      .toc > ol > li::before { content: counter(toc) ". "; color: var(--brand); font-weight: 800; }
+      .toc a { color: var(--ink); }
+      .toc .sub { display: block; font-weight: 400; font-size: 10.5px; color: var(--muted); padding-left: 18px; }
+
+      .scorecard td.n { font-weight: 800; text-align: center; }
+      .lead { font-size: 13px; color: #333; }
+      .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: 10px; color: var(--brand); font-weight: 700; }
+      hr { border: none; border-top: 1px solid var(--line); margin: 16px 0; }
+      .small { font-size: 10.5px; color: var(--muted); }
+      .two-col { column-count: 2; column-gap: 20px; }
+      .two-col li { break-inside: avoid; }
+    </style>
+  </head>
+  <body>
+    <!-- ===================== COVER ===================== -->
+    <div class="cover">
+      <div class="logo">S</div>
+      <div class="kicker">Reverse-Engineered Engineering Handbook</div>
+      <h1>SpeakX&nbsp;AI</h1>
+      <div class="sub">
+        The complete engineering &amp; technical-interview handbook for
+        <strong>GD-IMPROVEMENT-APP</strong> — an AI-assisted English speaking,
+        group-discussion, debate and interview coach.
+      </div>
+      <div class="chips">
+        <span class="chip">React 18</span>
+        <span class="chip">TypeScript 5</span>
+        <span class="chip">Vite 5</span>
+        <span class="chip">Recharts</span>
+        <span class="chip">Web Speech API</span>
+        <span class="chip">localStorage</span>
+        <span class="chip">Client-only SPA</span>
+      </div>
+      <div class="meta">
+        Repository: <code>RRNauhwar/GD-IMPROVEMENT-APP</code><br />
+        Prepared for interviews at Google · Microsoft · Amazon · Atlassian · Adobe · Salesforce · Oracle · startups<br />
+        Every statement below is grounded in the actual source code. Absent features are explicitly marked <span class="tag missing">NOT PRESENT</span>.
+      </div>
+    </div>
+
+    <!-- ===================== TOC ===================== -->
+    <nav class="toc">
+      <h1>Table of Contents</h1>
+      <ol>
+        <li><a href="#s1">Executive Summary</a><span class="sub">Problem, users, pitches (30s / 2m / 5m), limitations, roadmap</span></li>
+        <li><a href="#s2">Complete Folder Structure</a><span class="sub">Every file, why it exists, blast radius if removed</span></li>
+        <li><a href="#s3">Complete Architecture</a><span class="sub">High/low-level, frontend, "backend", data, auth, AI, API, deployment</span></li>
+        <li><a href="#s4">End-to-End Request Flow</a><span class="sub">From page load to rendered coaching report</span></li>
+        <li><a href="#s5">System Design &amp; Scaling</a><span class="sub">1 → 1,000,000 users, CAP, bottlenecks, trade-offs</span></li>
+        <li><a href="#s6">Frontend Deep Dive</a><span class="sub">Routing, state, hooks, rendering, performance</span></li>
+        <li><a href="#s7">Backend Deep Dive</a><span class="sub">What exists vs. what is missing</span></li>
+        <li><a href="#s8">Data / "Database" Deep Dive</a><span class="sub">localStorage schema, ER diagram, integrity</span></li>
+        <li><a href="#s9">API Documentation</a><span class="sub">Web Speech API + optional OpenAI call</span></li>
+        <li><a href="#s10">Authentication &amp; Authorization</a><span class="sub">None — analysis and correct design</span></li>
+        <li><a href="#s11">AI Module</a><span class="sub">Prompt flow, tokens, latency, cost, failure modes</span></li>
+        <li><a href="#s12">Security Audit</a><span class="sub">API key exposure, XSS, prompt injection, CORS, fixes</span></li>
+        <li><a href="#s13">Performance Analysis</a><span class="sub">Bundle, renders, memory, complexity</span></li>
+        <li><a href="#s14">Code Review</a><span class="sub">SOLID, DRY, KISS, anti-patterns, refactors</span></li>
+        <li><a href="#s15">Design Patterns</a><span class="sub">Patterns actually used vs. absent</span></li>
+        <li><a href="#s16">Libraries</a><span class="sub">Every dependency, rationale, alternatives</span></li>
+        <li><a href="#s17">Deployment</a><span class="sub">Build, hosting, env, CI/CD (missing)</span></li>
+        <li><a href="#s18">Complete Interview Questions</a><span class="sub">Categorized, leveled, with model answers &amp; follow-ups</span></li>
+        <li><a href="#s19">Live Coding Questions</a><span class="sub">Derived from this codebase, with solutions</span></li>
+        <li><a href="#s20">Resume Verification</a><span class="sub">Claims, exaggerations, stronger wording</span></li>
+        <li><a href="#s21">Mock Interview</a><span class="sub">Full escalating transcript</span></li>
+        <li><a href="#s22">Cheat Sheet &amp; Top 100 Questions</a><span class="sub">Last-minute revision</span></li>
+      </ol>
+      <p class="small">Scores (architecture, scalability, security, maintainability, code quality, interview-readiness) appear at the end of Section 14 and in the Cheat Sheet.</p>
+    </nav>
+
+
+    <!-- ===================== SECTION 1 ===================== -->
+    <section class="section" id="s1">
+      <h1><span class="badge">1</span> Executive Summary</h1>
+
+      <p class="lead">
+        <strong>SpeakX AI</strong> (repository <code>GD-IMPROVEMENT-APP</code>) is a browser-based
+        coaching application that listens to a person speaking on a discussion/debate/interview
+        topic and returns a structured, multi-dimensional <em>coaching report</em>: scores across 13
+        speaking dimensions, grammar corrections, fluency metrics (words-per-minute, filler words),
+        speech-structure detection, personalized drills, gamification (XP, levels, streaks, badges),
+        and a progress dashboard that charts improvement across sessions.
+      </p>
+
+      <h2>1.1 What problem does it solve?</h2>
+      <p>
+        Improving spoken English, group-discussion (GD) and interview performance normally requires a
+        human coach who is expensive, not always available, and inconsistent. SpeakX AI provides an
+        always-available, private, <em>objective-first</em> practice loop: pick a topic → speak against a
+        timer → receive an immediate, measurable report → practice the auto-generated "next challenge"
+        that targets your weakest dimension.
+      </p>
+
+      <div class="callout note">
+        <p><strong>The central engineering idea.</strong> The product deliberately separates
+        <em>objective, deterministic analysis</em> (computed locally in
+        <code>src/lib/analysis/engine.ts</code> — WPM, filler counts, vocabulary diversity, rule-based
+        grammar, structure detection) from an <em>optional, subjective LLM narrative</em>
+        (<code>src/lib/llm.ts</code>). The app is fully functional and honest with <strong>zero</strong>
+        external dependencies at runtime; the LLM only layers qualitative prose on top.</p>
+      </div>
+
+      <h2>1.2 Target users</h2>
+      <table>
+        <thead><tr><th>Segment</th><th>Need</th><th>How the app serves it (in code)</th></tr></thead>
+        <tbody>
+          <tr><td>Students preparing for placement GDs / interviews</td><td>Repeatable practice + measurable feedback</td><td>5 modes in <code>SetupScreen.tsx</code>; <code>interviewReadiness()</code> scores Big-Tech/MBA/Govt/Public-Speaking</td></tr>
+          <tr><td>Non-native English speakers</td><td>Grammar + pronunciation + vocabulary upgrades</td><td><code>analyzeGrammar()</code>, <code>analyzePronunciation()</code>, <code>WEAK_WORDS</code> upgrades</td></tr>
+          <tr><td>Professionals prepping for public speaking</td><td>Confidence, pacing, structure</td><td>Timer + 10s warning in <code>SpeakingScreen.tsx</code>; <code>analyzeStructure()</code>, fear-signal detection</td></tr>
+          <tr><td>Self-learners who want a habit loop</td><td>Motivation + streaks + progress trend</td><td><code>gamification.ts</code> (XP/levels/streaks/badges), <code>Dashboard.tsx</code> trend charts</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1.3 Business use case &amp; why it exists</h2>
+      <ul>
+        <li><strong>Positioning:</strong> a "practice-and-measure" tool that can be shipped as a free web app, embedded in ed-tech platforms, or upsold with the AI layer (bring-your-own-key today, managed key later).</li>
+        <li><strong>Cost profile:</strong> because scoring is deterministic and client-side, the marginal cost per session is essentially <strong>zero</strong> unless the optional LLM is enabled. This is a genuine differentiator versus fully-LLM competitors.</li>
+        <li><strong>Privacy:</strong> all data (sessions, progress, key) lives in the user's browser <code>localStorage</code>; nothing is transmitted unless the user opts into the OpenAI call.</li>
+      </ul>
+
+      <h2>1.4 Current limitations <span class="tag partial">HONEST</span></h2>
+      <ul>
+        <li><strong>Pronunciation &amp; pauses are estimated from text, not audio.</strong> <code>analyzePronunciation()</code> flags long/known-hard words; <code>longPauses</code> is derived from WPM, not from the audio signal. This is explicitly labelled in the UI (<code>PronunciationAnalysis.note</code>).</li>
+        <li><strong>Grammar is rule-based (10 regex rules)</strong> in <code>grammar.ts</code> — it catches common patterns (e.g. "should of", "he don't") but is not a full parser.</li>
+        <li><strong>Transcription depends on the Web Speech API</strong> (Chrome/Edge). Other browsers fall back to a typed transcript.</li>
+        <li><strong>No accounts / no cloud sync.</strong> Clearing browser storage erases all history.</li>
+        <li><strong>No backend, database, authentication, tests, or CI/CD.</strong> <span class="tag missing">NOT PRESENT</span></li>
+      </ul>
+
+      <h2>1.5 Future improvements (roadmap)</h2>
+      <ol>
+        <li>Real audio analysis (Web Audio API + a speech model) for true pronunciation, pace and pause detection.</li>
+        <li>A thin backend proxy so the LLM key is never in the browser (fixes the key-exposure risk in §12).</li>
+        <li>Accounts + cloud persistence (Postgres/Supabase) for cross-device progress.</li>
+        <li>Automated tests (Vitest + React Testing Library) around the pure <code>engine.ts</code> functions.</li>
+        <li>Route-based code-splitting to shrink the ~610&nbsp;kB bundle (Recharts dominates).</li>
+      </ol>
+
+      <h2>1.6 Elevator pitch (30 seconds)</h2>
+      <div class="callout tip">
+        <p>"SpeakX AI is a browser-based speaking coach. You pick a GD/interview topic, speak against a
+        timer, and instantly get a scored coaching report — grammar fixes, filler-word counts,
+        words-per-minute, structure analysis and targeted drills — plus a progress dashboard and
+        gamified streaks. It runs entirely client-side, so it's private and costs nothing per session,
+        with an optional AI layer for richer feedback."</p>
+      </div>
+
+      <h2>1.7 Interview pitch (2 minutes)</h2>
+      <p>
+        "GD-IMPROVEMENT-APP is a React 18 + TypeScript + Vite single-page app that coaches spoken
+        English. The interesting engineering decision is the separation of concerns between
+        <em>measurement</em> and <em>opinion</em>. All the objective analysis lives in a pure, dependency-free
+        module, <code>src/lib/analysis/engine.ts</code> — its <code>analyzeSpeech()</code> function takes a
+        transcript plus timing and returns a fully-typed <code>CoachReport</code>. It computes WPM, counts
+        single- and multi-word fillers using a <code>Set</code> and regex, measures vocabulary diversity via a
+        type-token ratio, runs ten regex grammar rules, and detects speech structure with discourse-marker
+        lexicons. Because it's pure, it's trivially testable and I actually verified it with a smoke test.
+      </p>
+      <p>
+        The UI is a small screen state-machine in <code>App.tsx</code> — no router library — that flows
+        setup → speaking → report → dashboard. Speech capture wraps the browser Web Speech API in a
+        custom hook, <code>useSpeechRecognition</code>, which handles Chrome's periodic auto-stop by
+        restarting recognition. Persistence is <code>localStorage</code> behind a tiny repository in
+        <code>storage.ts</code>. There's an optional LLM enhancement that calls OpenAI directly from the
+        browser using the user's own key, and it degrades gracefully — if the call fails, the
+        deterministic report is still shown. I can walk through any of these, and I'm also happy to talk
+        about what I'd add for production: a key-proxying backend, accounts, and tests."
+      </p>
+
+      <h2>1.8 Interview pitch (5 minutes)</h2>
+      <p>The 5-minute version expands the 2-minute pitch with four "why" decisions and their trade-offs:</p>
+      <table>
+        <thead><tr><th>Decision</th><th>What I did</th><th>Why / trade-off</th></tr></thead>
+        <tbody>
+          <tr><td>Deterministic engine first, LLM optional</td><td>All scores from <code>engine.ts</code>; LLM only adds prose via <code>applyEnhancement()</code></td><td>Zero-cost, offline, testable, honest. Trade-off: heuristics are coarser than an LLM's judgement.</td></tr>
+          <tr><td>Client-only, localStorage</td><td>No backend; <code>storage.ts</code> repository</td><td>Ships instantly, private, $0 infra. Trade-off: no cross-device sync, data lost if storage cleared.</td></tr>
+          <tr><td>Screen state-machine, no router</td><td><code>type Screen</code> union + <code>useState</code> in <code>App.tsx</code></td><td>Tiny footprint for 6 screens. Trade-off: no deep-linking / back-button semantics.</td></tr>
+          <tr><td>Honest metrics</td><td>Pronunciation/pauses labelled "estimated"; <code>MIN_SPEECH_WORDS</code> guard blocks fake scores</td><td>Builds user trust. Trade-off: less "magical" than pretending to measure audio.</td></tr>
+        </tbody>
+      </table>
+      <p>
+        I'd close by naming the biggest risk — the OpenAI key is exposed if a user enables the AI layer,
+        because the browser calls the API directly — and the exact fix: a small server-side proxy holding
+        the key, which also unlocks rate-limiting and caching. That shows I understand the security
+        boundary I consciously traded away for a zero-backend MVP.
+      </p>
+    </section>
+
+    <!-- ===================== SECTION 2 ===================== -->
+    <section class="section" id="s2">
+      <h1><span class="badge">2</span> Complete Folder Structure</h1>
+      <p>The tree below is the actual repository layout (build output and <code>node_modules</code> omitted).</p>
+<pre><code class="language-text">GD-IMPROVEMENT-APP/
+├── index.html                  # Vite HTML entry; mounts #root, loads /src/main.tsx
+├── package.json                # scripts + deps (react, react-dom, recharts)
+├── package-lock.json           # locked dependency graph
+├── tsconfig.json               # app TS config (strict, noEmit, bundler resolution)
+├── tsconfig.node.json          # TS config for vite.config.ts (composite)
+├── vite.config.ts              # Vite + @vitejs/plugin-react, dev server :5173
+├── .gitignore                  # ignores node_modules, dist, *.tsbuildinfo, emitted config
+├── README.md                   # feature docs + run instructions + honest caveats
+├── public/
+│   └── vite.svg                # favicon (gradient "S" logo)
+├── scripts/
+│   ├── smoke.ts                # manual functional test of analyzeSpeech()
+│   └── render-pdf.mjs          # (docs tooling) HTML→PDF via puppeteer
+├── docs/
+│   └── handbook.html           # (this document, source)
+└── src/
+    ├── main.tsx                # React root: createRoot(...).render(&lt;App/&gt;)
+    ├── App.tsx                 # screen state-machine + session orchestration
+    ├── index.css               # full design system (light theme)
+    ├── types.ts                # ALL domain types + DURATION_OPTIONS
+    ├── vite-env.d.ts           # Vite client type reference
+    ├── hooks/
+    │   └── useSpeechRecognition.ts   # Web Speech API wrapper hook
+    ├── lib/
+    │   ├── topics.ts           # topic generator (40 seeds × 4 frames)
+    │   ├── storage.ts          # localStorage repository (sessions/game/key)
+    │   ├── gamification.ts     # XP, levels, streaks, badges, insights
+    │   ├── llm.ts              # optional OpenAI enhancement + SPEAKX_SYSTEM_PROMPT
+    │   └── analysis/
+    │       ├── engine.ts       # analyzeSpeech() — the deterministic core
+    │       ├── text.ts         # tokenizing, sentences, syllables, clamp, countBy
+    │       ├── grammar.ts      # 10 regex grammar rules → GrammarIssue[]
+    │       └── lexicons.ts     # fillers, weak/power/advanced words, markers
+    └── components/
+        ├── SetupScreen.tsx     # mode/difficulty/category/duration + topic picker
+        ├── SpeakingScreen.tsx  # countdown timer + live transcript capture
+        ├── ReportView.tsx      # the 14-section coaching report (+ radar chart)
+        ├── Dashboard.tsx       # progress trend charts + session history
+        ├── Settings.tsx        # optional OpenAI API key entry
+        └── common.tsx          # ScoreBar, ScoreRing, Section, Stat helpers</code></pre>
+
+      <h2>2.1 Why each file exists &amp; blast radius if removed</h2>
+      <table>
+        <thead><tr><th>File</th><th>Responsibility</th><th>If removed…</th></tr></thead>
+        <tbody>
+          <tr><td><code>index.html</code></td><td>Vite entry; single <code>#root</code> div + module script</td><td>App has no mount point; Vite build fails.</td></tr>
+          <tr><td><code>src/main.tsx</code></td><td>Bootstraps React 18 <code>createRoot</code> in <code>StrictMode</code></td><td>Nothing renders; blank page.</td></tr>
+          <tr><td><code>src/App.tsx</code></td><td>Top-level state-machine; owns sessions, gamification, active config; orchestrates <code>handleFinish</code></td><td>No navigation/orchestration; app is non-functional.</td></tr>
+          <tr><td><code>src/types.ts</code></td><td>Single source of truth for every domain type; <code>DURATION_OPTIONS</code></td><td>Type errors cascade through the whole codebase.</td></tr>
+          <tr><td><code>src/index.css</code></td><td>Entire design system (theme vars, cards, timer, ring, charts)</td><td>App renders unstyled.</td></tr>
+          <tr><td><code>lib/analysis/engine.ts</code></td><td><strong>The core.</strong> <code>analyzeSpeech()</code> + <code>MIN_SPEECH_WORDS</code> guard</td><td>No coaching report can be produced; product loses its reason to exist.</td></tr>
+          <tr><td><code>lib/analysis/text.ts</code></td><td>Pure text utilities (<code>words</code>, <code>sentences</code>, <code>syllables</code>, <code>clamp</code>, <code>countBy</code>)</td><td>Engine + grammar break (shared primitives).</td></tr>
+          <tr><td><code>lib/analysis/grammar.ts</code></td><td>Rule-based grammar detection</td><td>Grammar section of report is empty; scores shift.</td></tr>
+          <tr><td><code>lib/analysis/lexicons.ts</code></td><td>Word lists (fillers, markers, weak/power words)</td><td>Fluency/structure/vocabulary analysis collapse.</td></tr>
+          <tr><td><code>lib/topics.ts</code></td><td>Topic + "next challenge" generation</td><td>No topics to speak on; setup + next-challenge break.</td></tr>
+          <tr><td><code>lib/storage.ts</code></td><td>localStorage repository (persistence boundary)</td><td>No history, gamification, or key persistence.</td></tr>
+          <tr><td><code>lib/gamification.ts</code></td><td>XP/level/streak/badge + cross-session insights</td><td>Report loses XP banner &amp; insights; dashboard still works.</td></tr>
+          <tr><td><code>lib/llm.ts</code></td><td>Optional OpenAI enhancement + system prompt</td><td>Only the optional AI narrative is lost; deterministic app unaffected.</td></tr>
+          <tr><td><code>hooks/useSpeechRecognition.ts</code></td><td>Web Speech API lifecycle (start/stop/restart/errors)</td><td>Live transcription breaks; only typed fallback would remain.</td></tr>
+          <tr><td><code>components/*</code></td><td>Presentational screens</td><td>Corresponding screen disappears.</td></tr>
+          <tr><td><code>scripts/smoke.ts</code></td><td>Manual functional check of the engine</td><td>No automated confidence in engine changes (it is not a CI gate).</td></tr>
+        </tbody>
+      </table>
+      <div class="callout note"><p><strong>Layering observation.</strong> The dependency direction is clean and one-way:
+      <code>components → lib → types</code>, and within <code>lib/analysis</code>, <code>engine → {grammar, text, lexicons}</code>.
+      Nothing in <code>lib/</code> imports from <code>components/</code>. This is why the engine is unit-testable in isolation (as <code>smoke.ts</code> proves).</p></div>
+    </section>
+
+
+    <!-- ===================== SECTION 3 ===================== -->
+    <section class="section" id="s3">
+      <h1><span class="badge">3</span> Complete Architecture</h1>
+
+      <div class="callout warn">
+        <p><strong>Reality check before we draw boxes.</strong> Many "architecture" boxes people expect
+        (API gateway, microservices, database cluster, auth server) <em>do not exist</em> in this project.
+        This is a <strong>client-only SPA</strong>. Below, each diagram shows what is real; anything not in
+        the code is labelled <span class="tag missing">NOT PRESENT</span>. Inventing them would fail an
+        honest reverse-engineering review.</p>
+      </div>
+
+      <h2>3.1 High-level architecture</h2>
+      <div class="mermaid">
+flowchart TB
+    subgraph Browser["User's Browser (the entire runtime)"]
+        UI["React SPA UI<br/>App.tsx + components/"]
+        HOOK["useSpeechRecognition<br/>(Web Speech API)"]
+        ENGINE["Analysis Engine<br/>lib/analysis/engine.ts"]
+        GAME["Gamification<br/>lib/gamification.ts"]
+        STORE["Repository<br/>lib/storage.ts"]
+        LS[("localStorage<br/>3 keys")]
+    end
+    MIC["Microphone (mic input)"] --> HOOK
+    HOOK -->|transcript| UI
+    UI -->|analyzeSpeech| ENGINE
+    ENGINE -->|CoachReport| UI
+    UI --> GAME
+    UI --> STORE
+    STORE --- LS
+    UI -.->|optional, user opt-in| OPENAI["OpenAI API<br/>api.openai.com"]
+    CDN["Static host / CDN<br/>(serves built assets)"] -.->|HTML/JS/CSS on load| Browser
+      </div>
+      <div class="fig-cap">Figure 3.1 — Everything except the optional OpenAI call and static hosting runs inside one browser tab.</div>
+
+      <h2>3.2 Low-level module architecture (component diagram)</h2>
+      <div class="mermaid">
+flowchart TB
+    MAIN["main.tsx"] --> APP["App.tsx<br/>(state machine)"]
+    APP --> SETUP["SetupScreen"]
+    APP --> SPEAK["SpeakingScreen"]
+    APP --> REPORT["ReportView"]
+    APP --> DASH["Dashboard"]
+    APP --> SET["Settings"]
+    SETUP --> TOPICS["lib/topics.ts"]
+    SPEAK --> HOOK["hooks/useSpeechRecognition"]
+    APP --> ENGINE["lib/analysis/engine.ts"]
+    ENGINE --> GRAMMAR["grammar.ts"]
+    ENGINE --> TEXT["text.ts"]
+    ENGINE --> LEX["lexicons.ts"]
+    ENGINE --> TOPICS
+    GRAMMAR --> TEXT
+    APP --> GAME["lib/gamification.ts"]
+    APP --> STORE["lib/storage.ts"]
+    APP --> LLM["lib/llm.ts"]
+    GAME --> STORE
+    REPORT --> RECHARTS["recharts (Radar)"]
+    DASH --> RECHARTS2["recharts (Line)"]
+    REPORT --> COMMON["components/common.tsx"]
+    subgraph types["types.ts (imported by all)"]
+    end
+      </div>
+      <div class="fig-cap">Figure 3.2 — Import graph. Note the one-way flow: components → lib → types.</div>
+
+      <h2>3.3 Frontend architecture</h2>
+      <p>Three layers, no framework beyond React:</p>
+      <table>
+        <thead><tr><th>Layer</th><th>Files</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>Presentation</td><td><code>components/*</code>, <code>common.tsx</code>, <code>index.css</code></td><td>Pure rendering; props in, callbacks out. No business logic.</td></tr>
+          <tr><td>Orchestration / state</td><td><code>App.tsx</code>, <code>hooks/useSpeechRecognition.ts</code></td><td>Owns app state, drives screen transitions, wires domain calls.</td></tr>
+          <tr><td>Domain / logic (pure)</td><td><code>lib/analysis/*</code>, <code>lib/topics.ts</code>, <code>lib/gamification.ts</code>, <code>lib/storage.ts</code>, <code>lib/llm.ts</code></td><td>Framework-agnostic TypeScript. Testable without React.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3.4 "Backend" architecture <span class="tag missing">NOT PRESENT</span></h2>
+      <p>
+        There is no server, no Node/Express, no serverless functions, no container. The only network
+        egress the code can make is the optional <code>fetch("https://api.openai.com/...")</code> in
+        <code>llm.ts</code>, executed by the browser. All "backend-like" work (scoring, persistence) happens
+        client-side. §7 covers what a real backend would look like and why it is the #1 production gap.
+      </p>
+
+      <h2>3.5 Data architecture (localStorage)</h2>
+      <p>The "database" is three JSON blobs in <code>localStorage</code>, namespaced with a version suffix (see <code>storage.ts</code>):</p>
+      <table>
+        <thead><tr><th>Key</th><th>Shape</th><th>Writer</th></tr></thead>
+        <tbody>
+          <tr><td><code>speakx.sessions.v1</code></td><td><code>Session[]</code> (newest first via <code>unshift</code>)</td><td><code>saveSession</code>, <code>deleteSession</code>, <code>clearSessions</code></td></tr>
+          <tr><td><code>speakx.gamification.v1</code></td><td><code>GamificationState</code></td><td><code>saveGamification</code> (via <code>awardForSession</code>)</td></tr>
+          <tr><td><code>speakx.openai.key.v1</code></td><td><code>string</code> (raw key)</td><td><code>saveApiKey</code></td></tr>
+        </tbody>
+      </table>
+      <p>Full ER-style model and integrity discussion in §8.</p>
+
+      <h2>3.6 Authentication &amp; Authorization architecture <span class="tag missing">NOT PRESENT</span></h2>
+      <p>
+        There is no login, no user identity, no JWT/OAuth/session/cookie, and therefore no authorization.
+        The app is single-user-per-browser. This is architecturally coherent for a local tool, but it means
+        "your data" is really "this browser's data." §10 analyses this and sketches the correct design if
+        accounts were added.
+      </p>
+
+      <h2>3.7 AI architecture</h2>
+      <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant APP as App.tsx
+    participant ENG as engine.ts
+    participant LLM as llm.ts
+    participant OAI as OpenAI API
+    U->>APP: finish speaking (transcript, seconds)
+    APP->>ENG: analyzeSpeech(input)
+    ENG-->>APP: CoachReport (deterministic)
+    alt API key present in localStorage
+        APP->>LLM: enhanceWithLlm(...)
+        LLM->>OAI: POST /v1/chat/completions (gpt-4o-mini, JSON mode)
+        OAI-->>LLM: JSON narrative
+        LLM-->>APP: LlmEnhancement | null
+        APP->>APP: applyEnhancement(report, enh)
+    else no key OR call fails
+        APP->>APP: keep deterministic report
+    end
+    APP-->>U: render ReportView
+      </div>
+      <div class="fig-cap">Figure 3.7 — The LLM is strictly an <em>enhancer</em>; the app never depends on it. Detail in §11.</div>
+
+      <h2>3.8 API architecture</h2>
+      <p>The app exposes <strong>no</strong> API of its own. It <em>consumes</em> two browser/remote APIs:</p>
+      <ul>
+        <li><strong>Web Speech API</strong> (<code>SpeechRecognition</code>/<code>webkitSpeechRecognition</code>) — local, in-browser speech-to-text, wrapped by <code>useSpeechRecognition</code>.</li>
+        <li><strong>OpenAI Chat Completions</strong> — optional, called directly from the browser in <code>llm.ts</code>.</li>
+      </ul>
+      <p>Full request/response contracts in §9.</p>
+
+      <h2>3.9 Deployment architecture</h2>
+      <div class="mermaid">
+flowchart LR
+    DEV["Developer"] -->|git push| REPO["GitHub repo"]
+    REPO -->|manual: npm run build| DIST["dist/ static bundle"]
+    DIST -->|upload| HOST["Static host<br/>(Netlify / Vercel / GitHub Pages / S3+CDN)"]
+    HOST -->|HTTPS| USER["Browser"]
+    classDef missing fill:#fdeaea,stroke:#c81e1e,color:#c81e1e;
+    CI["CI/CD pipeline"]:::missing
+    REPO -.->|NOT PRESENT| CI
+      </div>
+      <div class="fig-cap">Figure 3.9 — Build is a static bundle; any static host works. No CI/CD is configured (§17).</div>
+    </section>
+
+
+    <!-- ===================== SECTION 4 ===================== -->
+    <section class="section" id="s4">
+      <h1><span class="badge">4</span> End-to-End Request Flow</h1>
+      <p>The prompt's canonical flow assumes a server, login, DB lookup and an API tier. This project has
+      none of those, so below is a <em>faithful mapping</em>: for each canonical step I state what actually
+      happens (or mark it <span class="tag missing">NOT PRESENT</span>), then give the true flow.</p>
+
+      <table>
+        <thead><tr><th>Canonical step</th><th>Reality in this codebase</th></tr></thead>
+        <tbody>
+          <tr><td>User opens website</td><td>Static host serves <code>index.html</code> + hashed JS/CSS. Browser runs <code>main.tsx</code> → mounts <code>&lt;App/&gt;</code>.</td></tr>
+          <tr><td>Login</td><td><span class="tag missing">NOT PRESENT</span> — no auth screen. App opens straight to <code>SetupScreen</code>.</td></tr>
+          <tr><td>Authentication</td><td><span class="tag missing">NOT PRESENT</span>.</td></tr>
+          <tr><td>Database lookup</td><td>Client-side: <code>loadSessions()</code> / <code>loadGamification()</code> read from <code>localStorage</code> during <code>useState</code> initialisers in <code>App.tsx</code>.</td></tr>
+          <tr><td>API</td><td>No first-party API. Web Speech API (local) provides transcript; OpenAI (optional) provides narrative.</td></tr>
+          <tr><td>Backend processing</td><td>Runs in the browser: <code>analyzeSpeech()</code> + <code>awardForSession()</code> + <code>buildInsights()</code>.</td></tr>
+          <tr><td>AI request</td><td>Optional <code>enhanceWithLlm()</code> → OpenAI, only if a key exists.</td></tr>
+          <tr><td>Response</td><td>A <code>CoachReport</code> object (plus <code>XpResult</code>, insights) held in React state.</td></tr>
+          <tr><td>Frontend rendering</td><td><code>ReportView</code> renders the 14 sections; Recharts draws the radar chart.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4.1 The real end-to-end sequence</h2>
+      <div class="mermaid">
+sequenceDiagram
+    autonumber
+    participant B as Browser
+    participant App as App.tsx
+    participant LS as localStorage
+    participant Setup as SetupScreen
+    participant Speak as SpeakingScreen
+    participant Hook as useSpeechRecognition
+    participant WSA as Web Speech API
+    participant Eng as engine.ts
+    participant LLM as llm.ts (opt)
+    participant Game as gamification.ts
+
+    B->>App: load bundle, mount App
+    App->>LS: loadSessions(), loadGamification()
+    LS-->>App: Session[], GamificationState
+    App->>Setup: render (home screen)
+    Setup->>Setup: generateTopic(difficulty, category)
+    Setup->>App: onStart({topic, mode, difficulty, durationSec})
+    App->>Speak: render (screen="speaking")
+    Speak->>Hook: start()
+    Hook->>WSA: new SpeechRecognition(); start()
+    WSA-->>Hook: onresult (interim + final chunks)
+    Hook-->>Speak: finalTranscript / interimTranscript
+    Note over Speak: 1s countdown; 10s warning; auto-finish at 0
+    Speak->>App: onFinish(transcript, actualSpeakingSec)
+    App->>Eng: countSpokenWords(transcript)
+    alt words < MIN_SPEECH_WORDS (12)
+        App->>App: screen="nospeech" (NO score, NO save, NO XP)
+    else enough speech
+        App->>Eng: analyzeSpeech(input)
+        Eng-->>App: CoachReport (deterministic)
+        opt key present
+            App->>LLM: enhanceWithLlm(...)
+            LLM-->>App: enhancement or null
+        end
+        App->>Game: buildInsights(), awardForSession()
+        App->>LS: saveSession(), saveGamification()
+        App->>App: screen="report"
+    end
+      </div>
+      <div class="fig-cap">Figure 4.1 — Every arrow corresponds to a real function call in the source.</div>
+
+      <h2>4.2 Step-by-step narration</h2>
+      <ol>
+        <li><strong>Cold load.</strong> The static host returns <code>index.html</code>; Vite's hashed module bundle boots React. <code>App</code>'s <code>useState</code> lazy initialisers call <code>loadSessions()</code>/<code>loadGamification()</code> so prior history is available on first paint.</li>
+        <li><strong>Setup.</strong> <code>SetupScreen</code> lets the user choose mode, difficulty, category, duration; <code>generateTopic()</code> produces a framed prompt. <code>onStart</code> lifts the config into <code>App.active</code> and switches <code>screen</code> to <code>"speaking"</code>.</li>
+        <li><strong>Speaking.</strong> <code>SpeakingScreen</code> starts the timer and calls <code>useSpeechRecognition.start()</code>. The hook creates a <code>SpeechRecognition</code> instance, sets <code>continuous</code>+<code>interimResults</code>, and accumulates final chunks. A <code>setInterval</code> ticks the countdown; at ≤10s a warning shows; at 0 it auto-finishes.</li>
+        <li><strong>Finish &amp; guard.</strong> <code>onFinish</code> computes <code>countSpokenWords</code>. If below <code>MIN_SPEECH_WORDS</code> (12), it routes to the <code>"nospeech"</code> screen and does <em>not</em> score/save/award — the fix that stops "marks for silence."</li>
+        <li><strong>Analyse.</strong> Otherwise <code>analyzeSpeech()</code> returns a fully-typed <code>CoachReport</code>. If a key exists, <code>enhanceWithLlm()</code> may add prose; failures fall back silently.</li>
+        <li><strong>Persist &amp; reward.</strong> <code>buildInsights()</code> compares against history; <code>awardForSession()</code> updates XP/level/streak/badges and persists; <code>saveSession()</code> prepends the session.</li>
+        <li><strong>Render.</strong> <code>screen="report"</code> mounts <code>ReportView</code>; Recharts renders the radar; the user can jump to the "next challenge" or the dashboard.</li>
+      </ol>
+    </section>
+
+    <!-- ===================== SECTION 5 ===================== -->
+    <section class="section" id="s5">
+      <h1><span class="badge">5</span> System Design &amp; Scaling</h1>
+      <div class="callout note"><p><strong>Framing.</strong> A client-only static SPA has an unusual scaling profile: the
+      "server" is just a CDN serving immutable files, so raw traffic scales almost for free. The real
+      scaling questions here are (a) the optional OpenAI dependency, (b) client-side storage limits, and
+      (c) bundle delivery. I'll answer the classic sub-topics against <em>this</em> reality rather than pretend
+      there's a fleet of app servers.</p></div>
+
+      <h2>5.1 Concept-by-concept</h2>
+      <table>
+        <thead><tr><th>Concept</th><th>Current state</th><th>What it would take</th></tr></thead>
+        <tbody>
+          <tr><td>Scalability</td><td>Static assets scale via CDN edge caching; compute is on each user's device</td><td>Nothing for the core; only the AI proxy (if added) needs to scale</td></tr>
+          <tr><td>Availability</td><td>= CDN availability (typically 99.9%+). No server to fall over.</td><td>Multi-region CDN; SLA on the future proxy</td></tr>
+          <tr><td>Fault tolerance</td><td>LLM failures are swallowed (<code>enhanceWithLlm</code> returns <code>null</code>); <code>safeParse</code> guards corrupt storage</td><td>Retry/backoff + circuit breaker on the proxy</td></tr>
+          <tr><td>Performance</td><td>Analysis is O(n) over words; renders are cheap; bundle ~610&nbsp;kB is the cost</td><td>Code-split Recharts; lazy-load Dashboard</td></tr>
+          <tr><td>Caching</td><td>Browser HTTP cache for hashed assets; localStorage as data cache</td><td>Service worker (PWA) for offline; CDN cache headers</td></tr>
+          <tr><td>Rate limiting</td><td><span class="tag missing">NOT PRESENT</span> (user's own OpenAI quota applies)</td><td>Enforce at the proxy per-user</td></tr>
+          <tr><td>Queue system</td><td><span class="tag missing">NOT PRESENT</span> / not needed</td><td>Only if batch/async AI jobs are introduced</td></tr>
+          <tr><td>Load balancing</td><td>Handled by CDN</td><td>ALB/NLB in front of the proxy fleet</td></tr>
+          <tr><td>Horizontal scaling</td><td>Implicit (every client is its own compute)</td><td>Stateless proxy replicas behind LB</td></tr>
+          <tr><td>Vertical scaling</td><td>N/A — no server to size</td><td>N/A</td></tr>
+          <tr><td>Microservices vs monolith</td><td>Neither — it's a <strong>frontend monolith</strong> (one SPA)</td><td>A single proxy service is enough; microservices would be over-engineering</td></tr>
+        </tbody>
+      </table>
+
+      <h2>5.2 CAP theorem</h2>
+      <p>CAP governs distributed data stores. Here, data is <strong>single-node</strong> (one browser's localStorage), so
+      CAP barely applies: there is no partition between replicas because there are no replicas. If cloud
+      sync were added, the honest choice for this domain (coaching history) is <strong>AP with eventual
+      consistency</strong> — a user should always be able to record a session offline (availability) and sync
+      later; a few seconds of staleness across devices is harmless. Strong consistency (CP) is unnecessary
+      because there are no concurrent writers to the same record.</p>
+
+      <h2>5.3 Database selection (if/when added)</h2>
+      <table>
+        <thead><tr><th>Option</th><th>Fit for this app</th></tr></thead>
+        <tbody>
+          <tr><td>PostgreSQL (or Supabase)</td><td><strong>Best default.</strong> Sessions are relational (user → sessions → report JSONB). Supabase also gives auth + row-level security cheaply.</td></tr>
+          <tr><td>MongoDB</td><td>Viable — <code>CoachReport</code> is already a nested document; but relational reporting/aggregation is easier in SQL.</td></tr>
+          <tr><td>Firebase</td><td>Fast to ship, good offline sync, but vendor lock-in and awkward complex queries.</td></tr>
+          <tr><td>Redis</td><td>Only as a cache / rate-limit store in front of the proxy, not as the primary store.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>5.4 Bottlenecks (today)</h2>
+      <ol>
+        <li><strong>Bundle size (~610&nbsp;kB, Recharts-dominated).</strong> First-load latency on slow networks. Fix: dynamic <code>import()</code> for chart-heavy screens.</li>
+        <li><strong>localStorage ceiling (~5&nbsp;MB).</strong> Each session stores the full <code>CoachReport</code> + transcript. Thousands of sessions could approach the limit; there is no pruning.</li>
+        <li><strong>OpenAI rate limits &amp; latency</strong> (only when AI enabled) — a per-key concern today; a shared-proxy concern later.</li>
+        <li><strong>Web Speech API</strong> quality/availability varies by browser and is network-backed in Chrome.</li>
+      </ol>
+
+      <h2>5.5 How it supports 100 → 1,000,000 users</h2>
+      <table class="scorecard">
+        <thead><tr><th>Scale</th><th>Does it hold?</th><th>Required changes</th></tr></thead>
+        <tbody>
+          <tr><td>100</td><td>✅ As-is</td><td>None. A single static host is plenty.</td></tr>
+          <tr><td>1,000</td><td>✅ As-is</td><td>Put the static bundle behind a CDN; add basic web analytics.</td></tr>
+          <tr><td>10,000</td><td>✅ Core; ⚠️ AI</td><td>If AI is on, introduce the key-proxy with per-user rate limiting + response caching.</td></tr>
+          <tr><td>100,000</td><td>⚠️</td><td>Accounts + cloud DB for cross-device history; proxy autoscaling; observability (metrics/logs/traces); code-split bundle.</td></tr>
+          <tr><td>1,000,000</td><td>⚠️</td><td>Multi-region CDN + DB read replicas; queue LLM calls with backpressure; cost controls &amp; abuse prevention; feature-flagged rollouts.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout tip"><p><strong>Interview-grade takeaway:</strong> "Because scoring is client-side and deterministic,
+      the app scales to a million users on a CDN with essentially no backend. The only component that
+      needs classic horizontal scaling is the AI proxy I'd add to hide the key — and that's a stateless
+      service, so it scales linearly behind a load balancer with Redis for rate-limiting and caching."</p></div>
+    </section>
+
+
+    <!-- ===================== SECTION 6 ===================== -->
+    <section class="section" id="s6">
+      <h1><span class="badge">6</span> Frontend Deep Dive</h1>
+
+      <h2>6.1 Routing — a screen state-machine (no router library)</h2>
+      <p>Navigation is a discriminated string union in <code>App.tsx</code>, switched with <code>useState</code>:</p>
+<pre><code class="language-typescript">type Screen = "home" | "speaking" | "report" | "dashboard" | "settings" | "nospeech";
+const [screen, setScreen] = useState&lt;Screen&gt;("home");</code></pre>
+      <div class="mermaid">
+stateDiagram-v2
+    [*] --> home
+    home --> speaking: onStart(config)
+    speaking --> report: onFinish (&ge;12 words)
+    speaking --> nospeech: onFinish (&lt;12 words)
+    speaking --> home: onCancel
+    nospeech --> speaking: Try again
+    nospeech --> home: Pick new topic
+    report --> home: onHome / practiceNext
+    home --> dashboard: nav
+    home --> settings: nav
+    dashboard --> home
+    settings --> home
+      </div>
+      <div class="fig-cap">Figure 6.1 — Six states; transitions are plain <code>setScreen()</code> calls. No URL involvement.</div>
+      <div class="callout warn"><p><strong>Trade-off:</strong> zero dependencies and trivial to reason about, but no deep-linking,
+      no browser back/forward semantics, and refresh always returns to <code>home</code>. For a tool this size that's
+      acceptable; at product scale you'd adopt React Router.</p></div>
+
+      <h2>6.2 State management</h2>
+      <p>All state is local React state — <strong>no Redux, Zustand, MobX, or Context</strong>. <code>App.tsx</code> is the single
+      owner of cross-screen state and passes data down via props; children communicate up via callbacks
+      ("lifting state up"). The pieces:</p>
+      <table>
+        <thead><tr><th>State</th><th>Type</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>screen</code></td><td><code>Screen</code></td><td>Which view is mounted</td></tr>
+          <tr><td><code>sessions</code></td><td><code>Session[]</code></td><td>History (seeded from localStorage)</td></tr>
+          <tr><td><code>game</code></td><td><code>GamificationState</code></td><td>XP/level/streak/badges</td></tr>
+          <tr><td><code>active</code></td><td><code>ActiveConfig | null</code></td><td>Config for the in-progress session</td></tr>
+          <tr><td><code>report</code>, <code>currentSession</code>, <code>insights</code>, <code>xp</code></td><td>various</td><td>Data for the report screen</td></tr>
+          <tr><td><code>analyzing</code>, <code>spokenWords</code>, <code>presetTopic</code></td><td>bool / number / Topic</td><td>Transient UI flags</td></tr>
+        </tbody>
+      </table>
+
+      <h2>6.3 Hooks used</h2>
+      <table>
+        <thead><tr><th>Hook</th><th>Where</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><code>useState</code></td><td>App, all screens</td><td>Local state, incl. lazy initialisers reading localStorage</td></tr>
+          <tr><td><code>useMemo</code></td><td><code>App</code> (<code>prog = levelProgress(game)</code>), <code>SetupScreen</code> (categories)</td><td>Avoid recompute per render</td></tr>
+          <tr><td><code>useEffect</code></td><td><code>useSpeechRecognition</code> (detect support, cleanup), <code>SpeakingScreen</code> (interval cleanup)</td><td>Side effects + teardown</td></tr>
+          <tr><td><code>useRef</code></td><td><code>useSpeechRecognition</code> (recognizer, "should listen" flag), <code>SpeakingScreen</code> (timer id, start time)</td><td>Mutable values that must not trigger re-render</td></tr>
+          <tr><td><code>useCallback</code></td><td><code>useSpeechRecognition</code> (<code>start/stop/reset</code>)</td><td>Stable function identities</td></tr>
+          <tr><td>custom <code>useSpeechRecognition</code></td><td><code>SpeakingScreen</code></td><td>Encapsulates Web Speech API lifecycle</td></tr>
+        </tbody>
+      </table>
+
+      <h2>6.4 The custom hook (concurrency &amp; the Chrome auto-stop problem)</h2>
+      <p>Chrome's <code>SpeechRecognition</code> fires <code>onend</code> periodically even mid-speech. The hook keeps a
+      <code>shouldListenRef</code> and restarts recognition on <code>onend</code> until the user stops — a small but real
+      piece of event-loop/async reasoning:</p>
+<pre><code class="language-typescript">rec.onend = () =&gt; {
+  if (shouldListenRef.current) {
+    try { rec.start(); } catch { /* ignore double-start */ }
+  } else {
+    setListening(false);
+  }
+};</code></pre>
+
+      <h2>6.5 Rendering</h2>
+      <p>Rendering is conditional JSX in <code>App.tsx</code> gated by <code>!analyzing &amp;&amp; screen === "…"</code>. Screens
+      mount/unmount on transition, which naturally resets their internal state (e.g. the timer resets when
+      re-entering <code>SpeakingScreen</code>). Lists use stable keys (<code>session.id</code>, indices for static arrays).</p>
+
+      <h2>6.6 API calls, forms &amp; validation</h2>
+      <ul>
+        <li><strong>API call:</strong> the single <code>fetch</code> is in <code>llm.ts</code> (§9/§11).</li>
+        <li><strong>Forms:</strong> controlled inputs — the API key field in <code>Settings.tsx</code> and the manual-transcript <code>&lt;textarea&gt;</code> in <code>SpeakingScreen.tsx</code>; chip "selectors" in <code>SetupScreen</code>/<code>Dashboard</code>.</li>
+        <li><strong>Validation:</strong> the meaningful rule is the <code>MIN_SPEECH_WORDS</code> guard (§4). Inputs are otherwise free-text; no schema validation library is used.</li>
+      </ul>
+
+      <h2>6.7 Performance, code-splitting, lazy loading, memoization</h2>
+      <ul>
+        <li><strong>Memoization:</strong> <code>useMemo</code>/<code>useCallback</code> as tabled above. Components are not wrapped in <code>React.memo</code> (not needed at this tree size).</li>
+        <li><strong>Code-splitting / lazy loading:</strong> <span class="tag missing">NOT PRESENT</span>. Everything ships in one chunk; Recharts is the largest contributor (§13).</li>
+        <li><strong>Renders:</strong> because <code>App</code> owns state, a state change re-renders the active screen subtree — acceptable given each screen is small and charts are leaf components.</li>
+      </ul>
+
+      <h2>6.8 Error handling (frontend)</h2>
+      <table>
+        <thead><tr><th>Site</th><th>Strategy</th></tr></thead>
+        <tbody>
+          <tr><td><code>useSpeechRecognition</code></td><td><code>onerror</code> ignores <code>no-speech</code>/<code>aborted</code>; surfaces others to <code>error</code> state; <code>try/catch</code> around <code>start()/stop()/abort()</code></td></tr>
+          <tr><td><code>storage.ts</code></td><td><code>safeParse</code> wraps <code>JSON.parse</code> in try/catch → returns fallback on corruption</td></tr>
+          <tr><td><code>llm.ts</code></td><td>Whole call in try/catch; non-OK responses and parse errors return <code>null</code> → deterministic report shown</td></tr>
+          <tr><td><code>main.tsx</code></td><td>Throws early if <code>#root</code> is missing (fail fast)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn"><p><strong>Gap:</strong> there is no React <strong>Error Boundary</strong>. An unexpected render-time exception
+      would blank the app. Adding one around the screen switch is a cheap resilience win.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 7 ===================== -->
+    <section class="section" id="s7">
+      <h1><span class="badge">7</span> Backend Deep Dive</h1>
+      <div class="callout missing"><p><strong>There is no backend.</strong> No routes, controllers, middleware,
+      server-side services, or logging infrastructure exist in the repository. Rather than fabricate them,
+      this section maps each backend concern to where the equivalent responsibility currently lives on the
+      client, then specifies the backend I would build for production.</p></div>
+
+      <h2>7.1 Backend concerns mapped to the client</h2>
+      <table>
+        <thead><tr><th>Backend concept</th><th>Client-side equivalent today</th></tr></thead>
+        <tbody>
+          <tr><td>Routes</td><td><code>screen</code> union + conditional render in <code>App.tsx</code></td></tr>
+          <tr><td>Controllers</td><td>Handlers in <code>App.tsx</code>: <code>startSession</code>, <code>handleFinish</code>, <code>practiceNext</code></td></tr>
+          <tr><td>Services</td><td><code>lib/analysis/engine.ts</code>, <code>lib/gamification.ts</code>, <code>lib/topics.ts</code>, <code>lib/llm.ts</code></td></tr>
+          <tr><td>Repository / DAO</td><td><code>lib/storage.ts</code> over <code>localStorage</code></td></tr>
+          <tr><td>Middleware</td><td><span class="tag missing">NOT PRESENT</span> (closest: the <code>MIN_SPEECH_WORDS</code> guard acts like a request validator)</td></tr>
+          <tr><td>Validation</td><td><code>countSpokenWords</code>/<code>hasSufficientSpeech</code>; <code>safeParse</code></td></tr>
+          <tr><td>Auth / AuthZ</td><td><span class="tag missing">NOT PRESENT</span> (§10)</td></tr>
+          <tr><td>Business logic</td><td>Pure functions in <code>lib/</code></td></tr>
+          <tr><td>Error handling</td><td>try/catch + null-fallbacks (§6.8)</td></tr>
+          <tr><td>Logging</td><td><span class="tag missing">NOT PRESENT</span> (no <code>console</code> logging in app code except the standalone <code>smoke.ts</code>)</td></tr>
+          <tr><td>Configuration</td><td>Build-time only: <code>vite.config.ts</code>, <code>tsconfig*.json</code>. No runtime env vars.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>7.2 The backend I would add for production</h2>
+      <div class="mermaid">
+flowchart LR
+    SPA["React SPA"] -->|POST /api/enhance| API["Node/Express or serverless"]
+    API -->|holds secret key| OAI["OpenAI"]
+    API --> REDIS[("Redis<br/>rate-limit + cache")]
+    SPA -->|POST /api/sessions| API
+    API --> PG[("PostgreSQL<br/>users, sessions")]
+    API --> AUTH["Auth (JWT / Supabase)"]
+      </div>
+      <div class="fig-cap">Figure 7.2 — Minimal, non-over-engineered backend: one service, one DB, one cache, one auth provider.</div>
+      <ul>
+        <li><strong>/api/enhance</strong> — proxies OpenAI so the key never reaches the browser; enforces per-user rate limits and caches identical transcript requests.</li>
+        <li><strong>/api/sessions</strong> — CRUD for cloud-synced history (replaces localStorage).</li>
+        <li><strong>Auth</strong> — JWT access token + refresh token, or Supabase Auth with row-level security.</li>
+        <li><strong>Logging/observability</strong> — structured logs, metrics, request tracing.</li>
+      </ul>
+    </section>
+
+
+    <!-- ===================== SECTION 8 ===================== -->
+    <section class="section" id="s8">
+      <h1><span class="badge">8</span> Data / "Database" Deep Dive</h1>
+      <div class="callout note"><p>There is no SQL/NoSQL database. The persistent store is
+      <code>localStorage</code> with three keys (§3.5). However, the <em>data model</em> is rich and fully typed in
+      <code>types.ts</code>, so we can treat the TypeScript interfaces as the schema and draw a real ER diagram of
+      the object graph that is serialised to JSON.</p></div>
+
+      <h2>8.1 ER diagram (logical model from <code>types.ts</code>)</h2>
+      <div class="mermaid">
+erDiagram
+    GAMIFICATION_STATE ||--o{ BADGE : "badges[]"
+    SESSION ||--|| TOPIC : "topic"
+    SESSION ||--|| COACH_REPORT : "report"
+    COACH_REPORT ||--|| SCORE_BREAKDOWN : "scores"
+    COACH_REPORT ||--|| FLUENCY : "fluency"
+    COACH_REPORT ||--|| STRUCTURE : "structure"
+    COACH_REPORT ||--|| VOCABULARY : "vocabulary"
+    COACH_REPORT ||--o{ GRAMMAR_ISSUE : "grammar[]"
+    COACH_REPORT ||--o{ COACHING_EXERCISE : "exercises[]"
+    COACH_REPORT ||--|| INTERVIEW_READINESS : "interview"
+    COACH_REPORT ||--|| DEBATE : "debate"
+    COACH_REPORT ||--|| TOPIC : "nextTopic"
+
+    SESSION {
+        string id PK
+        string date "ISO"
+        string mode
+        string difficulty
+        number durationSec
+        number actualSpeakingSec
+        string transcript
+    }
+    TOPIC {
+        string id PK
+        string title
+        string category
+        string difficulty
+        string prompt
+    }
+    COACH_REPORT {
+        number overallScore
+        string motivational
+        string dailyChallenge
+        bool llmEnhanced
+    }
+    SCORE_BREAKDOWN {
+        number confidence
+        number grammar
+        number vocabulary
+        number fluency
+        number pressureHandling
+    }
+    GAMIFICATION_STATE {
+        number xp
+        number level
+        number streakDays
+        string lastSessionDate
+    }
+      </div>
+      <div class="fig-cap">Figure 8.1 — The object graph serialised into <code>speakx.sessions.v1</code> and <code>speakx.gamification.v1</code>. (Selected fields shown; see <code>types.ts</code> for the full set.)</div>
+
+      <h2>8.2 "Tables" (localStorage keys) and their fields</h2>
+      <h3>Session (element of <code>speakx.sessions.v1</code>)</h3>
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>string</td><td>Primary key; <code>sess_${Date.now()}</code></td></tr>
+          <tr><td><code>date</code></td><td>string (ISO)</td><td>Used for dashboard ordering &amp; streaks</td></tr>
+          <tr><td><code>topic</code></td><td>Topic</td><td>Embedded (denormalised)</td></tr>
+          <tr><td><code>mode</code>, <code>difficulty</code></td><td>enums</td><td>Session config</td></tr>
+          <tr><td><code>durationSec</code> / <code>actualSpeakingSec</code></td><td>number</td><td>Target vs. actual; actual drives WPM</td></tr>
+          <tr><td><code>transcript</code></td><td>string</td><td>Raw text analysed</td></tr>
+          <tr><td><code>report</code></td><td>CoachReport</td><td>Embedded full report (denormalised)</td></tr>
+        </tbody>
+      </table>
+      <h3>GamificationState (<code>speakx.gamification.v1</code>)</h3>
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>xp</code></td><td>number</td><td>XP within current level (decremented on level-up)</td></tr>
+          <tr><td><code>level</code></td><td>number</td><td>Starts at 1; threshold <code>level*100</code></td></tr>
+          <tr><td><code>streakDays</code></td><td>number</td><td>+1 if gap==1 day, reset if gap&gt;1</td></tr>
+          <tr><td><code>lastSessionDate</code></td><td>string|null</td><td>ISO; basis for streak math</td></tr>
+          <tr><td><code>badges</code></td><td>string[]</td><td>Unlocked badge ids (set-like, dedup on insert)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>8.3 Relationships, indexes, queries</h2>
+      <ul>
+        <li><strong>Relationships</strong> are by <em>embedding</em>, not foreign keys: a <code>Session</code> embeds its <code>Topic</code> and full <code>CoachReport</code>. This is classic document-style denormalisation — one read yields everything to render a session.</li>
+        <li><strong>Indexes:</strong> <span class="tag missing">NOT PRESENT</span> — localStorage has none. "Queries" are just array methods: <code>filter</code> (delete), <code>reverse</code> (chronological chart), <code>reduce</code> (averages in <code>buildInsights</code>).</li>
+        <li><strong>Ordering:</strong> newest-first is maintained by <code>unshift</code> on write; the dashboard <code>reverse()</code>s a copy for oldest→newest trends.</li>
+      </ul>
+
+      <h2>8.4 Normalisation, transactions, constraints</h2>
+      <table>
+        <thead><tr><th>Aspect</th><th>State</th></tr></thead>
+        <tbody>
+          <tr><td>Normalisation</td><td>Deliberately <strong>denormalised</strong> (embedded documents). Fine for read-mostly, single-user data.</td></tr>
+          <tr><td>Transactions</td><td><span class="tag missing">NOT PRESENT</span>. Writes are single <code>setItem</code> calls — atomic per key, but multi-key updates (session + gamification) are <em>not</em> transactional. A crash between the two could desync XP from history.</td></tr>
+          <tr><td>Constraints</td><td>Enforced only by TypeScript types at compile time; no runtime schema validation of what's read back (a hand-edited localStorage blob could violate the types).</td></tr>
+        </tbody>
+      </table>
+      <div class="callout tip"><p><strong>Optimisation opportunities:</strong> (1) cap stored sessions or drop the transcript for old
+      sessions to respect the ~5&nbsp;MB limit; (2) add a <code>schemaVersion</code> and a migration on load; (3) validate
+      parsed data (e.g. with Zod) before trusting it.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 9 ===================== -->
+    <section class="section" id="s9">
+      <h1><span class="badge">9</span> API Documentation</h1>
+      <p>The application defines no first-party HTTP API. It integrates two external/browser APIs.
+      Both are documented below in the requested format.</p>
+
+      <h2>9.1 Web Speech API (browser, local)</h2>
+      <table>
+        <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Interface</td><td><code>window.SpeechRecognition ?? window.webkitSpeechRecognition</code></td></tr>
+          <tr><td>Wrapper</td><td><code>useSpeechRecognition(lang = "en-US")</code></td></tr>
+          <tr><td>Config</td><td><code>continuous = true</code>, <code>interimResults = true</code>, <code>lang = "en-US"</code></td></tr>
+          <tr><td>Events consumed</td><td><code>onresult</code> (interim+final), <code>onerror</code>, <code>onend</code> (auto-restart)</td></tr>
+          <tr><td>Auth</td><td>None (browser mic permission prompt)</td></tr>
+          <tr><td>Errors handled</td><td><code>no-speech</code>/<code>aborted</code> ignored; others → user-facing message + typed fallback</td></tr>
+          <tr><td>Availability</td><td>Chrome/Edge (yes); Firefox/Safari (limited/none) → manual typing</td></tr>
+        </tbody>
+      </table>
+
+      <h2>9.2 OpenAI Chat Completions (optional, remote)</h2>
+      <table>
+        <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Method / Endpoint</td><td><code>POST https://api.openai.com/v1/chat/completions</code></td></tr>
+          <tr><td>Caller</td><td><code>enhanceWithLlm()</code> in <code>llm.ts</code> (browser <code>fetch</code>)</td></tr>
+          <tr><td>Headers</td><td><code>Content-Type: application/json</code>, <code>Authorization: Bearer &lt;user key from localStorage&gt;</code></td></tr>
+          <tr><td>Body</td><td><code>model: "gpt-4o-mini"</code>, <code>temperature: 0.6</code>, <code>response_format: {type:"json_object"}</code>, <code>messages: [system, user]</code></td></tr>
+          <tr><td>Auth</td><td>User's own OpenAI key (bring-your-own-key)</td></tr>
+          <tr><td>Validation</td><td>Response parsed with <code>JSON.parse</code>; array fields defensively checked (<code>Array.isArray</code>)</td></tr>
+          <tr><td>Error codes</td><td>Any non-OK (<code>!res.ok</code>) or thrown error → returns <code>null</code> (graceful fallback)</td></tr>
+        </tbody>
+      </table>
+      <h4>Example request (body)</h4>
+<pre><code class="language-json">{
+  "model": "gpt-4o-mini",
+  "temperature": 0.6,
+  "response_format": { "type": "json_object" },
+  "messages": [
+    { "role": "system", "content": "You are SpeakX AI, ... (SPEAKX_SYSTEM_PROMPT)" },
+    { "role": "user", "content": "Topic: ...\nDifficulty: ...\nTranscript: ..." }
+  ]
+}</code></pre>
+      <h4>Example response (parsed <code>message.content</code>)</h4>
+<pre><code class="language-json">{
+  "detailedFeedback": "You opened with a clear stance and used a concrete example ...",
+  "strongIdeas": ["Personal anecdote about sleep", "Acknowledged the counter-view"],
+  "weakArguments": ["Claim about focus lacked evidence"],
+  "motivational": "You're closer than you think — tighten the ending.",
+  "dailyChallenge": "Re-record this topic and cut every 'basically'."
+}</code></pre>
+      <h4>Request flow diagram</h4>
+      <div class="mermaid">
+flowchart LR
+    A["enhanceWithLlm(args)"] --> B{apiKey?}
+    B -- no --> N["return null"]
+    B -- yes --> C["fetch POST /v1/chat/completions"]
+    C --> D{res.ok?}
+    D -- no --> N
+    D -- yes --> E["JSON.parse(message.content)"]
+    E -->|throws| N
+    E --> F["normalize fields → LlmEnhancement"]
+    F --> G["applyEnhancement(report, enh)"]
+      </div>
+      <div class="fig-cap">Figure 9.2 — Failure at any step falls back to the deterministic report.</div>
+    </section>
+
+
+    <!-- ===================== SECTION 10 ===================== -->
+    <section class="section" id="s10">
+      <h1><span class="badge">10</span> Authentication &amp; Authorization</h1>
+      <div class="callout missing"><p><strong>No authentication or authorization exists.</strong> There is no JWT, OAuth,
+      session, cookie, refresh/access token, password hashing, or role-based access control anywhere in
+      the codebase. The app is single-user-per-browser and stores everything locally.</p></div>
+
+      <h2>10.1 Why this is (currently) acceptable</h2>
+      <p>Because there is no server and no shared data, there is no identity to authenticate and no
+      resource to authorize access to. Each browser sees only its own <code>localStorage</code>. The one secret in
+      play — the optional OpenAI key — is supplied and owned by the user themselves.</p>
+
+      <h2>10.2 What each requested concept <em>would</em> be if accounts were added</h2>
+      <table>
+        <thead><tr><th>Concept</th><th>Design for this app</th></tr></thead>
+        <tbody>
+          <tr><td>Password hashing</td><td>Never store plaintext; use <code>bcrypt</code>/<code>argon2</code> on a backend. (Better: delegate to Supabase Auth / OAuth and store none.)</td></tr>
+          <tr><td>Access token (JWT)</td><td>Short-lived (~15&nbsp;min), signed, sent as <code>Authorization: Bearer</code>; carries <code>userId</code> to scope <code>/api/sessions</code>.</td></tr>
+          <tr><td>Refresh token</td><td>Long-lived, httpOnly + Secure + SameSite cookie; rotated on use.</td></tr>
+          <tr><td>OAuth</td><td>Google/GitHub sign-in — lowest friction for students; no password to manage.</td></tr>
+          <tr><td>Sessions / cookies</td><td>If server-rendered, httpOnly session cookie; for SPA, token-in-memory + refresh cookie.</td></tr>
+          <tr><td>RBAC</td><td>Minimal: <code>user</code> vs <code>admin</code>. Users can only read/write their own sessions (ownership check / row-level security).</td></tr>
+        </tbody>
+      </table>
+
+      <h2>10.3 Security risks tied to the <em>absence</em> of auth</h2>
+      <ul>
+        <li><strong>No data protection at rest:</strong> anyone with the device can read history via DevTools.</li>
+        <li><strong>Key exposure:</strong> the OpenAI key sits in <code>localStorage</code> in plaintext and is attached to a browser request — see §12 for the full analysis and fix.</li>
+        <li><strong>No abuse controls:</strong> without identity there is no per-user rate limiting on the (future) AI proxy.</li>
+      </ul>
+      <div class="callout note"><p><strong>Interview soundbite:</strong> "I didn't add auth because there's no server and no shared
+      state — it would be security theatre. The moment I introduce cloud sync, the correct move is OAuth
+      (Google) + short-lived JWT access tokens with an httpOnly refresh cookie, and row-level security so a
+      user can only touch their own sessions."</p></div>
+    </section>
+
+    <!-- ===================== SECTION 11 ===================== -->
+    <section class="section" id="s11">
+      <h1><span class="badge">11</span> AI Module</h1>
+      <p>The AI module is <code>src/lib/llm.ts</code>. It is <strong>optional</strong> and <strong>additive</strong>: the deterministic
+      engine always produces the report; the LLM only rewrites the qualitative prose.</p>
+
+      <h2>11.1 How AI is used</h2>
+      <ul>
+        <li>Triggered in <code>App.handleFinish</code> only when a key exists <em>and</em> the transcript is non-empty.</li>
+        <li><code>enhanceWithLlm()</code> sends topic, difficulty, duration, the engine's overall score/WPM/fillers, and the transcript.</li>
+        <li>The model returns JSON with five fields; <code>applyEnhancement()</code> merges <code>detailedFeedback</code>, <code>strongIdeas</code>, <code>weakArguments</code>, <code>motivational</code>, <code>dailyChallenge</code> into the report and flips <code>llmEnhanced = true</code>.</li>
+      </ul>
+
+      <h2>11.2 Prompt flow &amp; prompt engineering</h2>
+      <p>The system prompt (<code>SPEAKX_SYSTEM_PROMPT</code>) does three deliberate things:</p>
+      <ol>
+        <li><strong>Role framing:</strong> "world-class communication coach", explicitly "NOT a grammar checker" — steers away from duplicating the deterministic engine.</li>
+        <li><strong>Division of labour:</strong> tells the model that objective metrics are already computed, so it should add <em>human, specific</em> judgement, not recompute numbers.</li>
+        <li><strong>Structured output:</strong> demands a strict JSON object; combined with the API's <code>response_format: {type:"json_object"}</code> (JSON mode), this makes parsing reliable.</li>
+      </ol>
+      <div class="mermaid">
+flowchart TB
+    subgraph Input
+      T["topic + difficulty + duration"]
+      M["engine metrics (score, wpm, fillers)"]
+      TR["transcript"]
+    end
+    T --> P["user message"]
+    M --> P
+    TR --> P
+    SP["SPEAKX_SYSTEM_PROMPT<br/>(role + rules + JSON schema)"] --> CALL["chat.completions<br/>gpt-4o-mini, temp 0.6, JSON mode"]
+    P --> CALL
+    CALL --> J["JSON: detailedFeedback, strongIdeas,<br/>weakArguments, motivational, dailyChallenge"]
+    J --> MERGE["applyEnhancement()"]
+      </div>
+      <div class="fig-cap">Figure 11.1 — Prompt composition and merge.</div>
+
+      <h2>11.3 Context &amp; memory</h2>
+      <p><strong>Stateless / single-turn.</strong> Each call is independent — there is no conversation memory,
+      no embedding/RAG, and prior sessions are <em>not</em> sent to the model. "Memory" in the product sense
+      (progress over time) is handled deterministically by <code>buildInsights()</code> against localStorage, not by
+      the LLM.</p>
+
+      <h2>11.4 Token usage, latency, cost</h2>
+      <table>
+        <thead><tr><th>Factor</th><th>Estimate / control</th></tr></thead>
+        <tbody>
+          <tr><td>Input tokens</td><td>System prompt (~250) + metrics + transcript (a 2-min speech ≈ 300 words ≈ 400 tokens). Typically &lt; ~800 input tokens.</td></tr>
+          <tr><td>Output tokens</td><td>Small JSON, ~150–300 tokens.</td></tr>
+          <tr><td>Model</td><td><code>gpt-4o-mini</code> — chosen for low cost/latency; overridable via <code>args.model</code>.</td></tr>
+          <tr><td>Latency</td><td>Typically ~1–3&nbsp;s; the UI shows an "Analyzing…" state and the deterministic report is ready regardless.</td></tr>
+          <tr><td>Cost</td><td>Fractions of a cent per session on <code>gpt-4o-mini</code>; borne by the user's own key today.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>11.5 Failure cases &amp; handling</h2>
+      <table>
+        <thead><tr><th>Failure</th><th>Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td>No key</td><td>Skip entirely; deterministic report shown</td></tr>
+          <tr><td>HTTP error (401/429/5xx)</td><td><code>!res.ok</code> → return <code>null</code> → deterministic report</td></tr>
+          <tr><td>Malformed JSON</td><td><code>JSON.parse</code> throws → caught → <code>null</code></td></tr>
+          <tr><td>Partial JSON</td><td>Field-level defaults (<code>?? ""</code>, <code>Array.isArray</code> guards)</td></tr>
+          <tr><td>Network/CORS failure</td><td>Caught by try/catch → <code>null</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>11.6 Optimisation &amp; cost optimisation (future)</h2>
+      <ul>
+        <li><strong>Proxy + cache:</strong> identical transcripts → cached narrative (also hides the key).</li>
+        <li><strong>Debounce/opt-in:</strong> only call when the user requests "deeper feedback", not every session.</li>
+        <li><strong>Prompt trimming:</strong> cap transcript length sent; summarise very long speeches.</li>
+        <li><strong>Model tiering:</strong> mini by default, escalate only on request.</li>
+      </ul>
+      <div class="callout warn"><p><strong>Prompt-injection note:</strong> the user's transcript is untrusted text placed in the
+      user message. It could contain "ignore previous instructions…". Because the output is constrained to
+      a JSON schema and is only shown back to the same user (never used to take actions), blast radius is
+      low — but §12 still recommends output validation and treating the transcript as data, not
+      instructions.</p></div>
+    </section>
+
+
+    <!-- ===================== SECTION 12 ===================== -->
+    <section class="section" id="s12">
+      <h1><span class="badge">12</span> Security Audit</h1>
+      <p>Findings are grounded in the actual code. Severity reflects real-world impact for a client-only app.</p>
+
+      <table>
+        <thead><tr><th>#</th><th>Finding</th><th>Severity</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>OpenAI API key exposed in the browser</strong></td><td class="n" style="color:var(--bad)">High</td><td><code>llm.ts</code>, <code>storage.ts</code>, <code>Settings.tsx</code></td></tr>
+          <tr><td>2</td><td>Key stored in <code>localStorage</code> in plaintext</td><td class="n" style="color:var(--warn)">Medium</td><td><code>storage.ts</code> (<code>speakx.openai.key.v1</code>)</td></tr>
+          <tr><td>3</td><td>Prompt injection via transcript</td><td class="n" style="color:var(--warn)">Low–Med</td><td><code>llm.ts</code></td></tr>
+          <tr><td>4</td><td>No Content-Security-Policy / security headers</td><td class="n" style="color:var(--warn)">Medium</td><td><code>index.html</code> / host config</td></tr>
+          <tr><td>5</td><td>No Error Boundary (availability, not confidentiality)</td><td class="n" style="color:var(--muted)">Low</td><td><code>App.tsx</code></td></tr>
+          <tr><td>6</td><td>Untrusted localStorage trusted at read time</td><td class="n" style="color:var(--muted)">Low</td><td><code>storage.ts</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>12.1 Detailed findings &amp; fixes</h2>
+
+      <h3>Finding 1 — API key exposure <span class="lvl hard">HIGH</span></h3>
+      <p>When AI is enabled, the browser calls OpenAI directly with <code>Authorization: Bearer &lt;key&gt;</code>. The
+      key is therefore present in client memory and visible in the Network tab / any injected script. The
+      code itself acknowledges this (Settings warns the user), but the architecture cannot fully mitigate it.</p>
+      <div class="callout tip"><p><strong>Fix:</strong> introduce a backend proxy (<code>/api/enhance</code>) that holds the key as a
+      server secret; the browser sends only the transcript. This also enables per-user rate-limiting and
+      response caching. This is the single most important production change.</p></div>
+
+      <h3>Finding 2 — Plaintext key at rest <span class="lvl medium">MEDIUM</span></h3>
+      <p><code>saveApiKey</code> writes the raw string to <code>localStorage</code>, readable by any script on the origin
+      (so it compounds with any XSS). <strong>Fix:</strong> once a proxy exists, don't store the provider key on the
+      client at all; store only a session token for your own backend.</p>
+
+      <h3>Finding 3 — Prompt injection <span class="lvl medium">LOW–MED</span></h3>
+      <p>The transcript is untrusted and embedded in the user message. Blast radius is limited (JSON-mode
+      output shown only to the same user; the app never executes model output). <strong>Fix:</strong> keep JSON mode,
+      validate the parsed object against the expected shape (already partially done), and never feed model
+      output into anything executable.</p>
+
+      <h3>Finding 4 — Missing security headers <span class="lvl medium">MEDIUM</span></h3>
+      <p>No CSP, <code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>, etc. For a static SPA these are set at
+      the host/CDN. <strong>Fix:</strong> add a strict CSP (allow <code>self</code> + <code>api.openai.com</code> for <code>connect-src</code>),
+      <code>X-Content-Type-Options: nosniff</code>, <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</p>
+
+      <h3>Findings 5 &amp; 6 — Resilience <span class="lvl easy">LOW</span></h3>
+      <p>Add a React Error Boundary; validate parsed localStorage with a schema (e.g. Zod) and migrate or
+      discard invalid blobs instead of trusting them.</p>
+
+      <h2>12.2 Threats that are <em>not</em> applicable</h2>
+      <table>
+        <thead><tr><th>Threat</th><th>Status</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>SQL Injection</td><td class="n">N/A</td><td>No database, no SQL.</td></tr>
+          <tr><td>CSRF</td><td class="n">N/A</td><td>No cookies/sessions; no state-changing server endpoints.</td></tr>
+          <tr><td>Broken access control</td><td class="n">N/A</td><td>No multi-user resources to control.</td></tr>
+          <tr><td>Server secret leakage</td><td class="n">N/A*</td><td>No server; *the client key issue is Finding 1.</td></tr>
+          <tr><td>Stored XSS</td><td class="n">Low</td><td>React escapes text by default; no <code>dangerouslySetInnerHTML</code>; user text is rendered as text, not HTML.</td></tr>
+          <tr><td>CORS misconfig</td><td class="n">N/A</td><td>No first-party API to misconfigure; OpenAI sets its own CORS.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout note"><p><strong>XSS specifically:</strong> a grep of the codebase shows no <code>dangerouslySetInnerHTML</code>,
+      no <code>eval</code>, and no injection of user text into HTML. React's default escaping makes reflected/stored
+      XSS unlikely with the current rendering approach.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 13 ===================== -->
+    <section class="section" id="s13">
+      <h1><span class="badge">13</span> Performance Analysis</h1>
+
+      <h2>13.1 Bundle size (measured)</h2>
+      <p>Production build output (from <code>npm run build</code>):</p>
+      <table>
+        <thead><tr><th>Asset</th><th>Raw</th><th>Gzip</th></tr></thead>
+        <tbody>
+          <tr><td><code>index.html</code></td><td>~0.62 kB</td><td>~0.38 kB</td></tr>
+          <tr><td>CSS</td><td>~8.2 kB</td><td>~2.6 kB</td></tr>
+          <tr><td>JS bundle</td><td><strong>~610 kB</strong></td><td><strong>~175 kB</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn"><p><strong>Largest issue:</strong> the single JS chunk exceeds Vite's 500&nbsp;kB warning, dominated
+      by <strong>Recharts</strong> (which pulls in D3 modules). It is loaded even on the home screen, which never shows a chart.</p></div>
+      <p><strong>Fixes:</strong> (1) <code>React.lazy</code> + dynamic <code>import()</code> for <code>ReportView</code>/<code>Dashboard</code> so Recharts loads
+      only when a chart is shown; (2) <code>manualChunks</code> to split the vendor; (3) consider a lighter chart lib.</p>
+
+      <h2>13.2 Rendering &amp; re-renders</h2>
+      <ul>
+        <li>State lives in <code>App</code>; a change re-renders the active screen subtree only (others are unmounted).</li>
+        <li>No obvious wasteful re-render loops. <code>useMemo</code> guards <code>levelProgress</code> and category derivation.</li>
+        <li><strong>Opportunity:</strong> the countdown <code>setInterval</code> in <code>SpeakingScreen</code> updates <code>remaining</code> every second, re-rendering that screen — cheap, but the live transcript also updates frequently; both are isolated to that screen.</li>
+      </ul>
+
+      <h2>13.3 Algorithmic complexity of the engine</h2>
+      <table>
+        <thead><tr><th>Function</th><th>Work</th><th>Complexity</th></tr></thead>
+        <tbody>
+          <tr><td><code>words()</code>/<code>sentences()</code></td><td>Single regex pass</td><td>O(n) in transcript length</td></tr>
+          <tr><td><code>countBy()</code></td><td>One pass into a <code>Map</code></td><td>O(w) in word count</td></tr>
+          <tr><td><code>analyzeFluency()</code></td><td>Word scan + phrase regexes + counts</td><td>O(w)</td></tr>
+          <tr><td><code>analyzeGrammar()</code></td><td>10 rules × sentences</td><td>O(r·s) — r=10 constant → O(s)</td></tr>
+          <tr><td><code>analyzeStructure()</code></td><td>Marker <code>includes</code> scans</td><td>O(m·n) — m constant</td></tr>
+          <tr><td><code>score()</code>/<code>overall()</code></td><td>Fixed arithmetic over 13 dims</td><td>O(1)</td></tr>
+          <tr><td><code>analyzeSpeech()</code> (whole)</td><td>Sum of above</td><td><strong>O(n)</strong> in transcript size</td></tr>
+        </tbody>
+      </table>
+      <p>Space is O(w) for the frequency maps/sets. For any realistic speech (hundreds of words) this is
+      effectively instant — the deterministic report is not a performance concern.</p>
+
+      <h2>13.4 Memory leaks &amp; network</h2>
+      <ul>
+        <li><strong>Timers/recognizers cleaned up:</strong> <code>SpeakingScreen</code> clears its interval on unmount; <code>useSpeechRecognition</code> aborts recognition in its cleanup effect. No obvious leaks.</li>
+        <li><strong>Network:</strong> only static assets (cacheable, immutable hashes) + the optional OpenAI call. Nothing chatty.</li>
+        <li><strong>localStorage growth:</strong> unbounded session history (§8.4) is the main long-term memory concern on the client.</li>
+      </ul>
+
+      <h2>13.5 Caching opportunities</h2>
+      <ul>
+        <li>Hashed static assets → long <code>Cache-Control: immutable</code> at the CDN.</li>
+        <li>Service worker for offline use (PWA) — the deterministic app works fully offline already.</li>
+        <li>LLM response cache keyed by transcript hash (at the future proxy).</li>
+      </ul>
+    </section>
+
+
+    <!-- ===================== SECTION 14 ===================== -->
+    <section class="section" id="s14">
+      <h1><span class="badge">14</span> Code Review</h1>
+
+      <h2>14.1 What's done well</h2>
+      <ul>
+        <li><strong>Separation of concerns:</strong> pure domain logic in <code>lib/</code>, presentation in <code>components/</code>, orchestration in <code>App.tsx</code>. Import direction is one-way.</li>
+        <li><strong>Type safety:</strong> a single <code>types.ts</code> is the source of truth; <code>tsconfig</code> is <code>strict</code> with <code>noUnusedLocals</code>/<code>noUnusedParameters</code>.</li>
+        <li><strong>Pure, testable core:</strong> <code>analyzeSpeech</code> and helpers have no side effects (verified by <code>smoke.ts</code>).</li>
+        <li><strong>Graceful degradation:</strong> LLM and storage failures never crash the app.</li>
+        <li><strong>Honest UX:</strong> estimated metrics are labelled; the <code>MIN_SPEECH_WORDS</code> guard prevents fake scores.</li>
+        <li><strong>Readable naming:</strong> functions read like their intent (<code>analyzeFluency</code>, <code>detectFearSignals</code>, <code>awardForSession</code>).</li>
+      </ul>
+
+      <h2>14.2 Principles scorecard</h2>
+      <table>
+        <thead><tr><th>Principle</th><th>Assessment</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SRP (SOLID)</strong></td><td>Strong in <code>lib/</code>; <code>App.tsx</code> is a mild "god component" (state + orchestration + all screen JSX).</td></tr>
+          <tr><td><strong>Open/Closed</strong></td><td>Grammar rules and lexicons are data-driven arrays — extend by adding entries, no logic change. Good.</td></tr>
+          <tr><td><strong>DIP</strong></td><td>Partial: <code>gamification.ts</code> imports <code>storage.ts</code> directly (concrete dependency), making it harder to test in isolation. Injecting the store would improve this.</td></tr>
+          <tr><td><strong>DRY</strong></td><td>Mostly dry; score-label maps appear in both <code>engine.ts</code> and <code>ReportView</code>/<code>Dashboard</code> — a shared label map would remove duplication.</td></tr>
+          <tr><td><strong>KISS</strong></td><td>Excellent — no premature abstraction, no unnecessary libraries.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>14.3 Anti-patterns / smells</h2>
+      <ul>
+        <li><strong>God component:</strong> <code>App.tsx</code> holds ~10 state slices and all screen rendering. Extracting a <code>useSession()</code> hook and a screen router would help.</li>
+        <li><strong>Hidden coupling to global:</strong> <code>gamification.ts</code> reads/writes storage internally, so <code>awardForSession</code> has a side effect that isn't obvious from its signature.</li>
+        <li><strong>Non-transactional multi-key writes</strong> (§8.4).</li>
+        <li><strong>Dead-ish code:</strong> <code>expectedWordsPerSentence</code>/<code>sentenceCount</code> in <code>analyzeFluency</code> are computed then <code>void</code>-discarded — leftover from an earlier approach.</li>
+        <li><strong>Magic numbers:</strong> scoring weights (e.g. <code>92</code>, <code>fillerRate*350</code>, <code>idealWpm=130</code>) are literals; extracting a tuning-constants object would aid clarity and testing.</li>
+        <li><strong>No tests in CI:</strong> <code>smoke.ts</code> is manual only.</li>
+      </ul>
+
+      <h2>14.4 Concrete refactoring opportunities</h2>
+      <ol>
+        <li>Extract <code>App</code> orchestration into <code>useSpeakingSession()</code>; keep <code>App</code> as a thin router.</li>
+        <li>Introduce a <code>SCORE_LABELS</code> shared constant used by engine + views.</li>
+        <li>Make <code>awardForSession(state, report)</code> pure and let the caller persist — removes the hidden side effect and improves testability.</li>
+        <li>Move scoring constants into a <code>tuning.ts</code> and add unit tests pinning known transcripts to expected score ranges.</li>
+        <li>Add Vitest + React Testing Library; wire into CI.</li>
+      </ol>
+
+      <h2>14.5 Overall scores (out of 10)</h2>
+      <table class="scorecard">
+        <thead><tr><th>Dimension</th><th>Score</th><th>Rationale</th></tr></thead>
+        <tbody>
+          <tr><td>Architecture</td><td class="n">7.5</td><td>Clean layering &amp; pure core; limited by god-component and no backend boundary.</td></tr>
+          <tr><td>Scalability</td><td class="n">7.0</td><td>Static/CDN scales freely; localStorage &amp; bundle are the ceilings.</td></tr>
+          <tr><td>Security</td><td class="n">5.5</td><td>Good defaults (React escaping, graceful failures) but the client-side key is a real high-sev gap.</td></tr>
+          <tr><td>Maintainability</td><td class="n">7.5</td><td>Strong types, readable names; magic numbers &amp; god-component cost a point.</td></tr>
+          <tr><td>Code quality</td><td class="n">7.5</td><td>Consistent, idiomatic TS/React; minor dead code.</td></tr>
+          <tr><td>Interview-readiness</td><td class="n">9.0</td><td>Rich talking points: pure functions, heuristics, trade-offs, honest gaps, clear roadmap.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout tip"><p><strong>Weighted overall ≈ 7.3/10</strong> as a portfolio/MVP project — and a <strong>9/10 as an
+      interview vehicle</strong>, precisely because it has clear, defensible decisions and honestly-scoped gaps
+      you can discuss.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 15 ===================== -->
+    <section class="section" id="s15">
+      <h1><span class="badge">15</span> Design Patterns</h1>
+      <p>Only patterns <em>actually present</em> are claimed. Absent ones are marked and explained.</p>
+      <table>
+        <thead><tr><th>Pattern</th><th>Present?</th><th>Where / why</th></tr></thead>
+        <tbody>
+          <tr><td>Repository</td><td class="n" style="color:var(--good)">Yes</td><td><code>storage.ts</code> abstracts the localStorage persistence boundary behind <code>load*/save*</code> functions.</td></tr>
+          <tr><td>Facade</td><td class="n" style="color:var(--good)">Yes</td><td><code>analyzeSpeech()</code> is a facade over fluency/vocab/grammar/structure/scoring sub-analyses.</td></tr>
+          <tr><td>Strategy (data-driven)</td><td class="n" style="color:var(--good)">Yes</td><td><code>RULES[]</code> in <code>grammar.ts</code> and <code>FRAMES</code> per difficulty in <code>topics.ts</code> select behaviour by data, not branching logic.</td></tr>
+          <tr><td>Adapter</td><td class="n" style="color:var(--good)">Yes</td><td><code>useSpeechRecognition</code> adapts the messy Web Speech API into a clean React interface; <code>applyEnhancement</code> adapts LLM JSON into <code>CoachReport</code>.</td></tr>
+          <tr><td>Custom Hook (React idiom)</td><td class="n" style="color:var(--good)">Yes</td><td><code>useSpeechRecognition</code> encapsulates stateful behaviour for reuse.</td></tr>
+          <tr><td>State Machine</td><td class="n" style="color:var(--good)">Yes</td><td><code>Screen</code> union in <code>App.tsx</code> (finite, explicit transitions).</td></tr>
+          <tr><td>Factory (light)</td><td class="n" style="color:var(--warn)">Partial</td><td><code>generateTopic()</code>/<code>generateChallengeTopic()</code> construct <code>Topic</code> objects.</td></tr>
+          <tr><td>Null Object / graceful fallback</td><td class="n" style="color:var(--warn)">Partial</td><td><code>enhanceWithLlm</code> returns <code>null</code> → caller keeps deterministic report.</td></tr>
+          <tr><td>MVC</td><td class="n" style="color:var(--warn)">Loose</td><td>Model=<code>lib</code>+<code>types</code>, View=<code>components</code>, Controller=<code>App</code> handlers — not a formal MVC framework.</td></tr>
+          <tr><td>Singleton</td><td class="n" style="color:var(--bad)">No</td><td>Module-scope constants (<code>SEEDS</code>, <code>FILLER_SET</code>) are effectively single instances, but no Singleton class.</td></tr>
+          <tr><td>Observer</td><td class="n" style="color:var(--bad)">No</td><td>React's own reactivity aside, no pub/sub in app code.</td></tr>
+          <tr><td>Dependency Injection</td><td class="n" style="color:var(--bad)">No</td><td>Dependencies are imported directly (see DIP note in §14).</td></tr>
+          <tr><td>Decorator / Command / Builder</td><td class="n" style="color:var(--bad)">No</td><td>Not used.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== SECTION 16 ===================== -->
+    <section class="section" id="s16">
+      <h1><span class="badge">16</span> Libraries</h1>
+      <p>The dependency footprint is intentionally tiny. Runtime deps: <strong>3</strong>.</p>
+      <table>
+        <thead><tr><th>Dependency</th><th>Type</th><th>Why it exists / why chosen</th><th>Alternatives</th><th>Trade-offs</th></tr></thead>
+        <tbody>
+          <tr><td><code>react</code> ^18.3</td><td>runtime</td><td>Declarative UI; concurrent-ready; team-standard</td><td>Vue, Svelte, SolidJS, Preact</td><td>+Ecosystem/hirability; −larger than Svelte/Preact</td></tr>
+          <tr><td><code>react-dom</code> ^18.3</td><td>runtime</td><td>DOM renderer + <code>createRoot</code></td><td>(paired with React)</td><td>Required with React on web</td></tr>
+          <tr><td><code>recharts</code> ^2.12</td><td>runtime</td><td>Declarative React charts (radar + line) with minimal code</td><td>Chart.js, visx, nivo, ECharts, hand-rolled SVG</td><td>+Fast to build; −<strong>bundle size</strong> (D3 deps) — main perf cost (§13)</td></tr>
+          <tr><td><code>vite</code> ^5.4</td><td>dev</td><td>Fast dev server + optimized Rollup build</td><td>CRA (deprecated), Webpack, Parcel, esbuild</td><td>+DX/speed; −younger plugin ecosystem than Webpack</td></tr>
+          <tr><td><code>@vitejs/plugin-react</code></td><td>dev</td><td>React Fast Refresh + JSX transform for Vite</td><td>SWC plugin variant</td><td>Standard choice</td></tr>
+          <tr><td><code>typescript</code> ^5.5</td><td>dev</td><td>Static types; the domain model is the backbone of the app</td><td>JSDoc + JS, Flow</td><td>+Safety/refactoring; −build step</td></tr>
+          <tr><td><code>@types/react</code>, <code>@types/react-dom</code></td><td>dev</td><td>Type definitions for React</td><td>—</td><td>Required for TS</td></tr>
+        </tbody>
+      </table>
+      <div class="callout note"><p><strong>Notable absences</strong> (by design): no state library (Redux/Zustand), no router,
+      no form/validation lib (Formik/RHF/Zod), no HTTP client (uses <code>fetch</code>), no UI kit (hand-rolled CSS),
+      no test framework. Fewer deps = smaller attack surface and simpler mental model — appropriate for
+      this scope, though tests should be added.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 17 ===================== -->
+    <section class="section" id="s17">
+      <h1><span class="badge">17</span> Deployment</h1>
+
+      <h2>17.1 Build &amp; scripts</h2>
+      <table>
+        <thead><tr><th>Command</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><code>npm run dev</code></td><td>Vite dev server on <code>:5173</code> (HMR)</td></tr>
+          <tr><td><code>npm run build</code></td><td><code>tsc -b</code> (type-check) then <code>vite build</code> → <code>dist/</code></td></tr>
+          <tr><td><code>npm run preview</code></td><td>Serve the built <code>dist/</code> locally</td></tr>
+          <tr><td><code>npm run lint</code></td><td><code>tsc --noEmit</code> (type-only lint; no ESLint configured)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>17.2 Environments &amp; env vars</h2>
+      <p><strong>No runtime environment variables.</strong> The OpenAI key is entered by the user at runtime (not an
+      <code>.env</code>). Configuration is entirely build-time (<code>vite.config.ts</code>, <code>tsconfig*.json</code>). There is no
+      separate dev/staging/prod config in the repo.</p>
+
+      <h2>17.3 Hosting</h2>
+      <p><code>dist/</code> is fully static, so any static host works: <strong>Netlify, Vercel, GitHub Pages, Cloudflare
+      Pages, or S3+CloudFront</strong>. SPA fallback (serve <code>index.html</code> for unknown paths) is trivial but, given
+      the state-machine routing, not strictly required.</p>
+
+      <h2>17.4 CI/CD, Docker, monitoring, logging <span class="tag missing">NOT PRESENT</span></h2>
+      <ul>
+        <li><strong>CI/CD:</strong> no <code>.github/workflows</code>, no pipeline. Deploy is manual (<code>build</code> → upload).</li>
+        <li><strong>Docker:</strong> no <code>Dockerfile</code> (a static SPA rarely needs one; an nginx image is optional).</li>
+        <li><strong>Monitoring/logging:</strong> none. <strong>Fix:</strong> add web-vitals + an error reporter (e.g. Sentry) and basic product analytics.</li>
+      </ul>
+      <div class="callout tip"><p><strong>Recommended minimal pipeline:</strong> GitHub Actions → <code>npm ci</code> → <code>npm run build</code>
+      (type-check gate) → deploy <code>dist/</code> to the static host on merge to <code>main</code>; add a preview deploy per PR.</p></div>
+    </section>
+
+
+    <!-- ===================== SECTION 18 ===================== -->
+    <section class="section" id="s18">
+      <h1><span class="badge">18</span> Complete Interview Questions</h1>
+      <p>Questions are grounded in this codebase and grouped by category. Each carries a difficulty pill and,
+      where useful, <em>why it's asked</em>, an <em>ideal answer</em>, <em>common mistakes</em>, and <em>follow-ups</em>.
+      Difficulty legend:
+      <span class="lvl easy">Easy</span>
+      <span class="lvl medium">Medium</span>
+      <span class="lvl hard">Hard</span>
+      <span class="lvl expert">Expert</span>
+      <span class="lvl staff">Staff</span>
+      <span class="lvl principal">Principal</span></p>
+
+      <h2>18.1 Project Introduction</h2>
+
+      <div class="qa">
+        <div class="q">Q1. Walk me through what this project does. <span class="lvl easy">Easy</span></div>
+        <div class="why">Why: opener; checks you can summarise scope crisply.</div>
+        <div class="a"><strong>Ideal:</strong> "It's a client-side React/TS SPA that coaches spoken English. You pick a GD/interview topic, speak against a timer while the Web Speech API transcribes you, and a deterministic engine returns a scored coaching report — 13 dimensions, grammar fixes, WPM, fillers, structure — plus gamification and a progress dashboard. An optional LLM layer adds qualitative prose."</div>
+        <div class="fu"><strong>Follow-ups:</strong> Why client-side? What's deterministic vs. AI? What did you personally build?</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q2. What was the hardest technical problem you solved here? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Two: (1) making the analysis <em>honest and testable</em> — a pure <code>analyzeSpeech()</code> that never fabricates scores, guarded by <code>MIN_SPEECH_WORDS</code>; (2) taming the Web Speech API, which auto-stops in Chrome mid-speech — I keep a <code>shouldListenRef</code> and restart on <code>onend</code>."</div>
+        <div class="fu"><strong>Follow-ups:</strong> How did you verify the engine? What happens on empty speech?</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q3. If you had one more week, what would you build? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "A backend proxy to hide the OpenAI key (my top security gap), then Vitest tests around the engine, then route-based code-splitting to cut the ~610&nbsp;kB bundle."</div>
+      </div>
+
+      <h2>18.2 Architecture</h2>
+
+      <div class="qa">
+        <div class="q">Q4. Describe the architecture in one minute. <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "A frontend monolith with three layers: presentation (<code>components/</code>), orchestration (<code>App.tsx</code> + hooks), and a pure domain layer (<code>lib/</code>). Imports flow one way, components → lib → types. Persistence is a small repository over localStorage. There is no backend — scoring runs in the browser."</div>
+        <div class="fu"><strong>Follow-ups:</strong> Where's the boundary you'd add a server? How do modules depend on each other?</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q5. Why no backend? Isn't that a limitation? <span class="lvl hard">Hard</span></div>
+        <div class="why">Why: tests whether you can defend a decision and know its costs.</div>
+        <div class="a"><strong>Ideal:</strong> "It's a deliberate MVP trade-off. Deterministic scoring doesn't <em>need</em> a server, so going client-only gave zero infra cost, instant privacy, and offline capability. The costs are real and I can name them: no cross-device sync, no way to hide the API key, and no server-side rate limiting. The first thing I'd add for production is a thin proxy — that single component resolves the key-exposure and rate-limit gaps at once."</div>
+        <div class="fu"><strong>Common mistake:</strong> claiming there are no downsides. Always volunteer the trade-off.</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q6. How is the analysis engine decoupled from React? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>lib/analysis/*</code> is plain TypeScript with no React import. <code>analyzeSpeech(input): CoachReport</code> is a pure function. That's why <code>scripts/smoke.ts</code> can run it in Node with no DOM — and why it's trivially unit-testable."</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q7. Design a v2 with accounts and cloud sync. <span class="lvl staff">Staff</span></div>
+        <div class="a"><strong>Ideal:</strong> "Add one stateless service (Node/serverless) with two concerns: <code>/api/enhance</code> proxying OpenAI (secret key, Redis rate-limit + cache) and <code>/api/sessions</code> CRUD backed by Postgres (users, sessions with a JSONB report). Auth via Google OAuth + short-lived JWT and an httpOnly refresh cookie; row-level security so users touch only their rows. Keep the client engine as-is for offline-first, sync sessions opportunistically (AP, eventual consistency). CDN stays in front of static assets."</div>
+        <div class="fu"><strong>Follow-ups:</strong> Why Postgres over Mongo? Why AP not CP? How do you migrate existing localStorage users?</div>
+      </div>
+
+      <h2>18.3 Frontend / React</h2>
+
+      <div class="qa">
+        <div class="q">Q8. How does navigation work without a router? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "A discriminated union <code>type Screen</code> in <code>App.tsx</code> plus <code>useState</code>; each screen is conditionally rendered. It's a finite state machine with explicit transitions via <code>setScreen()</code>."</div>
+        <div class="fu"><strong>Follow-up:</strong> What do you lose? (deep-linking, back button, refresh state) When would you switch to React Router?</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q9. Why no Redux/Zustand/Context? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "State is shallow and owned by one component; lifting state up + props/callbacks is sufficient and has zero overhead. Introducing a store would be premature abstraction. If the tree deepened or many distant components needed the same state, I'd reach for Context or Zustand."</div>
+        <div class="fu"><strong>Common mistake:</strong> saying Redux is always better. Right answer is 'fit to complexity'.</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q10. Explain your custom hook and why <code>useRef</code> is used there. <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>useSpeechRecognition</code> wraps the Web Speech API. I use <code>useRef</code> for the recognizer instance and a <code>shouldListenRef</code> boolean because these must persist across renders <em>without</em> triggering re-renders — a ref is mutable, stable storage. State (<code>listening</code>, <code>finalTranscript</code>) is separate because it <em>should</em> re-render the UI. On <code>onend</code>, if we still want to listen, I restart recognition — that's how I handle Chrome's periodic auto-stop."</div>
+        <div class="fu"><strong>Follow-ups:</strong> Why not put the recognizer in state? What cleanup do you do on unmount? What if two <code>start()</code> calls race?</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q11. How do you prevent stale closures in the countdown timer? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "The interval updates <code>remaining</code> with the functional updater <code>setRemaining(r =&gt; ...)</code>, so it never closes over a stale value. The timer id and start time are refs so the effect cleanup can clear the interval reliably."</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q12. What re-renders when the timer ticks, and is that a problem? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Only <code>SpeakingScreen</code> re-renders (other screens are unmounted). It's a tiny subtree, so a 1&nbsp;Hz re-render plus transcript updates is negligible. If it mattered, I'd isolate the timer display into a memoised child."</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q13. Why <code>React.StrictMode</code>, and what does it change? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "It double-invokes renders/effects in dev to surface impure logic and missing cleanups. It's why robust effect cleanup (aborting recognition, clearing intervals) matters — StrictMode mounts, unmounts, and remounts."</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q14. How would you code-split this app? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Wrap <code>ReportView</code> and <code>Dashboard</code> in <code>React.lazy(() =&gt; import(...))</code> with <code>Suspense</code>, so Recharts (the bulk of the ~610&nbsp;kB) only downloads when a chart is actually shown. Add <code>manualChunks</code> to separate vendor from app code."</div>
+      </div>
+
+      <div class="qa">
+        <div class="q">Q15. There's no Error Boundary — what's the risk and fix? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "A render-time throw anywhere would unmount the whole tree (blank screen). Fix: a class Error Boundary around the screen switch that shows a fallback and a 'reset' action; optionally report to Sentry."</div>
+      </div>
+
+
+      <h2>18.4 TypeScript</h2>
+      <div class="qa">
+        <div class="q">Q16. How do <code>DURATION_OPTIONS</code> and its <code>Duration</code> type work? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>DURATION_OPTIONS = [30,45,...] as const</code> is a readonly tuple of literals; <code>type Duration = typeof DURATION_OPTIONS[number]</code> derives the union <code>30|45|60|...</code>. One array is both the runtime source of the UI buttons and the compile-time type — no drift between them."</div>
+        <div class="fu"><strong>Follow-up:</strong> Why <code>as const</code>? (widening to <code>number[]</code> otherwise)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q17. Where do you use discriminated unions? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>Screen</code>, <code>Difficulty</code>, <code>SessionMode</code> are string-literal unions that make invalid states unrepresentable and give exhaustive <code>switch</code> checking (helped by <code>noFallthroughCasesInSwitch</code>)."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q18. What strictness flags are on and why do they matter? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>strict</code>, <code>noUnusedLocals</code>, <code>noUnusedParameters</code>, <code>noFallthroughCasesInSwitch</code>. They catch null/undefined bugs, dead variables, and missing switch cases at compile time. The build gate is <code>tsc -b</code>, so type errors fail the build."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q19. How is the optional LLM field typed without polluting the base type? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>CoachReport.llmDetailedFeedback?: string</code> is optional, and <code>llmEnhanced: boolean</code> flags provenance. The deterministic path sets <code>llmEnhanced:false</code> and omits the optional field; <code>applyEnhancement</code> returns a new object with them set — no mutation, and the UI can branch on <code>llmEnhanced</code>."</div>
+      </div>
+
+      <h2>18.5 The Analysis Engine (domain deep-dive)</h2>
+      <div class="qa">
+        <div class="q">Q20. How is WPM computed, and what's the edge case? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>wpm = round(totalWords / minutes)</code> where <code>minutes = max(durationSec/60, 1/60)</code>. The <code>max</code> avoids divide-by-zero for a sub-second duration. It uses <code>actualSpeakingSec</code>, not the target, so a user who finishes early isn't penalised on pace."</div>
+        <div class="fu"><strong>Follow-up:</strong> Why <code>actual</code> vs target seconds?</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q21. How are filler words detected, including multi-word ones? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Single-word fillers: tokenise, then membership-test against a <code>Set</code> (O(1) lookups). Multi-word phrases ('you know', 'i mean'): build a whitespace-tolerant regex per phrase and count matches on the raw lowercased text. Results are merged into one count map and sorted."</div>
+        <div class="fu"><strong>Follow-up:</strong> Why a Set for single words but regex for phrases?</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q22. How is vocabulary diversity measured? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Type-token ratio: <code>uniqueWords / totalWords</code> using a <code>Set</code> for the numerator. Higher ratio = less repetition. It also finds overused words (count ≥ 3), flags weak words with upgrade suggestions, and detects 'advanced' words used."</div>
+        <div class="fu"><strong>Follow-up (trap):</strong> Isn't TTR biased by length? (Yes — short samples score higher; a real system would use MTLD/moving-average TTR.)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q23. Explain the grammar checker design. Why regex and not an NLP parser? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "It's a Strategy list: an array of <code>{test, fix, explanation, rule, difficulty}</code> rules applied per sentence. Regex was chosen for zero dependencies, determinism, speed, and offline use. It catches high-frequency ESL errors ('should of', 'he don't', 'didn't went', a/an). The honest limitation is recall — it's not a parser, so it misses novel errors. That's exactly why the optional LLM exists for deeper feedback."</div>
+        <div class="fu"><strong>Follow-ups:</strong> How do you avoid duplicate issues? (a <code>seen</code> Set keyed by rule+sentence) How do you extend it? (append a rule object — open/closed)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q24. How does structure detection work and what's its weakness? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Discourse-marker lexicons (intro/argument/example/counter/conclusion) are substring-matched against the lowercased transcript; presence of each contributes to a 0–100 structure score. Weakness: marker-presence is a proxy — a well-structured speech that avoids explicit markers could score lower. It's a pragmatic heuristic, and I'd label it as such."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q25. Walk me through the scoring for <code>confidence</code>. Why did empty speech used to score high? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>confidence = clamp(92 - fearSignals*12 - fillerRate*150 - repetitionRatio*20)</code>. With an empty transcript, fillerRate and repetition are 0 and few fear signals fire, so it started near 92 — a bug that gave 'marks for silence'. I fixed it with a <code>MIN_SPEECH_WORDS = 12</code> gate in <code>App.handleFinish</code>: below the threshold we route to a 'no speech' screen and never score, save, or award XP."</div>
+        <div class="fu"><strong>Follow-ups:</strong> Why guard in the app rather than zero the scores in the engine? Would you make the engine reject too? (I added <code>hasSufficientSpeech</code> there as well.)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q26. How does difficulty affect scores? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "A <code>difficultyPenalty</code> (Advanced −4, Expert −8) is subtracted from every dimension via an <code>adj()</code> wrapper, so harder settings grade more strictly."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q27. The engine has <code>void expectedWordsPerSentence</code> — what is that? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Honest answer: leftover from an earlier pause-estimation approach. The variables are computed but discarded via <code>void</code> to satisfy <code>noUnusedLocals</code>. It's dead code I'd remove in cleanup — I flagged it in my own code review (§14)."</div>
+        <div class="fu"><strong>Why asked:</strong> integrity — do you own imperfections in your code?</div>
+      </div>
+
+      <h2>18.6 Data Structures, Algorithms &amp; Complexity</h2>
+      <div class="qa">
+        <div class="q">Q28. What data structures does the engine use and why? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>Set</code> for O(1) filler membership and for de-duplication (unique words, seen grammar issues); <code>Map</code> for word-frequency counting (<code>countBy</code>) and filler tallies; arrays for ordered lists and sorting. The choices are driven by the operation: membership → Set, counting → Map, ordering → array."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q29. What's the time complexity of <code>analyzeSpeech</code>? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "O(n) in transcript length. Tokenising is one pass; frequency counting is O(w); grammar is 10 (constant) rules × sentences; structure markers are a constant set of substring scans; scoring is O(1) over 13 fixed dimensions. Space is O(w) for the maps/sets."</div>
+        <div class="fu"><strong>Follow-up:</strong> Any hidden quadratics? (The per-phrase regex and per-marker <code>includes</code> are constant-count × n, so still linear.)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q30. How does the level-up loop work and could it be O(1)? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>while (xp &gt;= level*100) { xp -= level*100; level++ }</code>. It's a loop but bounded by how many levels a single session's XP can cross (tiny), so effectively O(1). With a closed-form threshold you could compute the target level directly, but the loop is clearer and cheap."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q31. Explain the syllable estimator. Is it exact? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "It strips silent endings ('e', 'es', 'ed'), removes a leading 'y', then counts vowel groups via regex, min 1. It's a well-known heuristic — fast and dependency-free but not exact (English is irregular). It's only used to flag 'likely hard to pronounce' long words, so approximate is fine."</div>
+      </div>
+
+      <h2>18.7 Data / localStorage / "Database"</h2>
+      <div class="qa">
+        <div class="q">Q32. How is data persisted and modelled? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "Three localStorage keys (sessions, gamification, api key), read/written through a repository in <code>storage.ts</code>. Sessions embed their topic and full report (document-style denormalisation), so one read renders everything."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q33. What are the risks of localStorage here? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "~5&nbsp;MB cap (unbounded history could hit it), synchronous main-thread API, no cross-tab transactions, no schema enforcement on read, and it's plaintext (bad for the key). I mitigate parse failures with <code>safeParse</code>; I'd add pruning, a schema version + migration, and Zod validation."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q34. Your session write and gamification write aren't atomic. Why does that matter? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "They're two separate <code>setItem</code> calls. Each is atomic alone, but a crash between them could leave XP updated without the session saved (or vice-versa) — a consistency gap. On a real DB I'd wrap both in a transaction; on the client I could write a single combined key or reconcile on load."</div>
+        <div class="fu"><strong>Why asked:</strong> do you understand atomicity/transactions beyond the buzzword?</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q35. If you moved to Postgres, what's the schema? <span class="lvl staff">Staff</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>users(id, ...)</code>; <code>sessions(id, user_id FK, created_at, mode, difficulty, duration_sec, actual_sec, transcript, report JSONB, overall_score)</code>. Index <code>(user_id, created_at)</code> for the dashboard timeline and a generated column or index on <code>overall_score</code> for best/avg. Report stays JSONB because it's read as a whole; I'd promote <code>overall_score</code> and a few scores to columns for aggregation."</div>
+      </div>
+
+
+      <h2>18.8 Async, Promises &amp; Concurrency</h2>
+      <div class="qa">
+        <div class="q">Q36. Why is <code>handleFinish</code> <code>async</code>? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "Because the optional LLM call is awaited. The deterministic report is computed synchronously first; only the enhancement is async. If no key, nothing is awaited and it proceeds immediately."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q37. What concurrency bug did the Web Speech API create and how did you fix it? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "Chrome fires <code>onend</code> unpredictably mid-speech. Naively that stops capture. I restart on <code>onend</code> while <code>shouldListenRef.current</code> is true, and wrap <code>start()</code> in try/catch because calling <code>start()</code> on an already-started recognizer throws. On unmount I flip the flag and <code>abort()</code> to avoid a zombie recognizer."</div>
+        <div class="fu"><strong>Follow-up:</strong> race between user 'stop' and an in-flight restart? (the flag is checked in <code>onend</code>, so stop wins.)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q38. How do you keep the UI responsive during analysis? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Deterministic analysis is O(n) and sub-millisecond, so it runs inline. An <code>analyzing</code> flag shows a spinner while the awaited LLM call resolves. For very heavy future analysis I'd move it to a Web Worker to keep the main thread free."</div>
+      </div>
+
+      <h2>18.9 AI / LLM / Prompt Engineering</h2>
+      <div class="qa">
+        <div class="q">Q39. How is the LLM integrated and why is it optional? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "It's purely additive: <code>enhanceWithLlm</code> is called only if a key exists, and it can only <em>augment</em> the report's prose via <code>applyEnhancement</code>. Any failure returns <code>null</code> and the deterministic report stands. The product never depends on the model being up or correct."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q40. How do you get reliable structured output from the model? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "Two layers: the API's JSON mode (<code>response_format: {type:'json_object'}</code>) and a prompt that specifies the exact JSON shape. Then I still validate defensively — <code>?? ''</code> defaults and <code>Array.isArray</code> guards — because 'valid JSON' isn't 'the schema I expected'."</div>
+        <div class="fu"><strong>Follow-up:</strong> Why not trust JSON mode alone? (It guarantees JSON, not your schema.)</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q41. How do you prevent the LLM from duplicating the deterministic metrics? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "The system prompt tells it the metrics are <em>already computed</em> and to add human, specific judgement — 'NOT a grammar checker'. I also feed it the engine's score/WPM/fillers as context so it aligns rather than recomputes."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q42. Prompt injection — is the transcript a risk? <span class="lvl expert">Expert</span></div>
+        <div class="a"><strong>Ideal:</strong> "The transcript is untrusted and sits in the user message, so it could try 'ignore your instructions'. Blast radius is low: output is schema-constrained, shown only to the same user, and never executed or used to take actions. I'd still (a) keep JSON mode, (b) validate output shape, (c) treat transcript strictly as data, and (d) never feed model output into privileged operations."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q43. Estimate tokens and cost per enhanced session. <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "~250 system + a few hundred transcript tokens in (&lt;~800), ~150–300 out. On <code>gpt-4o-mini</code> that's a fraction of a cent. To control cost at scale: proxy + cache identical transcripts, make it opt-in ('deeper feedback'), cap transcript length, and tier models."</div>
+      </div>
+
+      <h2>18.10 Security</h2>
+      <div class="qa">
+        <div class="q">Q44. What's the biggest security issue and how do you fix it? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "The OpenAI key is used directly from the browser, so it's exposed in memory and network requests. Fix: a backend proxy that holds the key server-side; the browser only sends the transcript. That also gives per-user rate limiting and caching. It's the #1 production change."</div>
+        <div class="fu"><strong>Common mistake:</strong> saying 'store it in <code>.env</code>' — a client-side <code>.env</code> is still bundled and public.</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q45. Is this app vulnerable to XSS? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Low risk: React escapes interpolated text by default, there's no <code>dangerouslySetInnerHTML</code>, no <code>eval</code>, and user text (transcript) is rendered as text. I'd still add a strict CSP at the host as defence-in-depth."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q46. Why are CSRF and SQL injection not concerns here? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "No cookies/sessions and no state-changing first-party endpoints → no CSRF surface. No database and no SQL → no SQL injection. They become relevant only when I add the backend, at which point parameterised queries and anti-CSRF tokens/SameSite cookies apply."</div>
+      </div>
+
+      <h2>18.11 System Design, Caching, Redis, Queues, Microservices, Docker, Cloud</h2>
+      <div class="qa">
+        <div class="q">Q47. How does this scale to a million users? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "The core is static assets + client compute, so a CDN handles a million users trivially. Only the optional AI proxy needs classic scaling — and it's stateless, so it scales horizontally behind a load balancer with Redis for rate-limiting and response caching. Data would move to Postgres with read replicas; LLM calls get a queue with backpressure for cost control."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q48. Where would Redis help? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "At the future proxy: (1) token-bucket rate limiting per user, (2) caching LLM responses keyed by a transcript hash to cut cost/latency, (3) optionally short-lived session/token storage."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q49. Do you need microservices or a queue? <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "No — that would be over-engineering. One stateless service covers enhance + sessions. A queue only earns its place if AI calls become batched/async or need retry with backpressure; then a job queue in front of OpenAI makes sense."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q50. Would you Dockerise it? <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "The SPA is static — it doesn't need a container to run; a CDN is simpler. I'd Dockerise the future backend proxy for consistent deploys. Optionally an nginx image serves the static bundle if the platform requires containers."</div>
+      </div>
+
+      <h2>18.12 Testing, Git, CI/CD</h2>
+      <div class="qa">
+        <div class="q">Q51. How is this tested? Be honest. <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Honestly, there's no automated test suite yet — just <code>scripts/smoke.ts</code>, a manual functional check that runs <code>analyzeSpeech</code> on a known transcript and asserts WPM/fillers/grammar/structure. The engine is pure, so it's <em>designed</em> for unit testing; the next step is Vitest for <code>lib/</code> and React Testing Library for screens, gated in CI."</div>
+        <div class="fu"><strong>Why asked:</strong> integrity + knowing the gap. Never claim tests that don't exist.</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q52. What would your first 5 unit tests be? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "(1) WPM for known words/seconds; (2) filler counting incl. a multi-word phrase; (3) each grammar rule fires + corrects; (4) <code>hasSufficientSpeech</code> boundary at 11/12 words; (5) <code>awardForSession</code> streak logic for gap 0/1/&gt;1 days (with a mocked store)."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q53. Describe your Git workflow on this repo. <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "Feature branch off <code>main</code>, focused commits with descriptive messages, PR for review, never push straight to <code>main</code>. I keep build artifacts out via <code>.gitignore</code> (<code>dist</code>, <code>*.tsbuildinfo</code>)."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q54. What CI/CD would you add? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "GitHub Actions: <code>npm ci</code> → typecheck (<code>tsc -b</code>) → tests → <code>vite build</code> → deploy <code>dist/</code> to the static host on merge; PR preview deploys. Add ESLint + Prettier as gates."</div>
+      </div>
+
+      <h2>18.13 JavaScript / Node fundamentals (surfaced by this code)</h2>
+      <div class="qa">
+        <div class="q">Q55. Why functional <code>setState</code> updaters in the timer? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "To avoid stale closures: <code>setRemaining(r =&gt; r-1)</code> uses the latest value rather than the value captured when the interval was created."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q56. Explain <code>a ?? b</code> vs <code>a || b</code> as used in the code. <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>??</code> only falls back on <code>null</code>/<code>undefined</code>; <code>||</code> falls back on any falsy (0, '', false). <code>loadApiKey</code> uses <code>?? ''</code> so a legitimately empty stored value is handled correctly; scoring code intentionally uses <code>||</code>-style OR only where falsy really means 'absent'."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q57. What does <code>as const</code> do and where is it critical? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Freezes literals and narrows types; critical for <code>DURATION_OPTIONS</code> so its element type is a literal union, not <code>number</code> (Q16)."</div>
+      </div>
+
+      <h2>18.14 Behavioral / Ownership / Leadership</h2>
+      <div class="qa">
+        <div class="q">Q58. Tell me about a bug you found and fixed here. <span class="lvl easy">Easy</span></div>
+        <div class="a"><strong>Ideal (STAR):</strong> "<em>Situation:</em> testing revealed the app scored a user who said nothing. <em>Task:</em> stop 'marks for silence' without hurting real short answers. <em>Action:</em> traced it to base scores (confidence started ~92); added <code>MIN_SPEECH_WORDS=12</code> and a guard in <code>handleFinish</code> plus <code>hasSufficientSpeech</code> in the engine, routing to a dedicated screen and skipping scoring/saving/XP. <em>Result:</em> verified with boundary cases (0/3/15 words); trust restored."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q59. Tell me about a trade-off you made and would defend. <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Client-only, deterministic-first. I chose zero infra + privacy + offline over cross-device sync and hidden keys, then documented the exact production path to close those gaps. I'd defend it because it shipped a working, honest product immediately while keeping a clean upgrade route."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q60. How did you ensure quality without a QA team? <span class="lvl medium">Medium</span></div>
+        <div class="a"><strong>Ideal:</strong> "Strict TypeScript as a first gate, a pure engine I could smoke-test in Node, and a build that fails on type errors. I also self-reviewed (see the code-review section) and listed the debt honestly rather than hiding it."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q61. Disagree-and-commit: someone insists on Redux here. <span class="lvl hard">Hard</span></div>
+        <div class="a"><strong>Ideal:</strong> "I'd show that state is shallow and local, so Redux adds boilerplate without benefit, and propose a lightweight Context/Zustand only if we hit prop-drilling pain. If the team still wanted it for consistency across a larger codebase, I'd commit and implement it cleanly — the decision is reversible and low-risk."</div>
+      </div>
+
+
+      <h2>18.15 Trap, Cross &amp; "What-if" Questions</h2>
+      <div class="qa">
+        <div class="q">Q62. You said it's "AI-powered". But the scores aren't AI at all, are they? <span class="lvl expert">Expert · TRAP</span></div>
+        <div class="a"><strong>Ideal:</strong> "Correct, and I'd own that framing. The <em>scoring</em> is deterministic heuristics, not AI — that's a feature (cheap, offline, testable, honest). The AI is an <em>optional enhancement</em> for qualitative prose. If a JD demands 'AI', I'd describe it precisely rather than overclaim; overclaiming is exactly what a good interviewer is probing for."</div>
+        <div class="fu"><strong>Trap avoided:</strong> don't pretend the heuristics are ML.</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q63. Your grammar checker will miss most real errors. Isn't it useless? <span class="lvl hard">Hard · CROSS</span></div>
+        <div class="a"><strong>Ideal:</strong> "It has high precision on common ESL patterns and zero cost/latency, which is valuable for instant feedback. It's not meant to be comprehensive — recall is intentionally traded for determinism, and the LLM path covers depth. Calling it 'useless' ignores the precision/latency/cost trade-off it's optimised for."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q64. What if two browser tabs run sessions simultaneously? <span class="lvl hard">Hard · WHAT-IF</span></div>
+        <div class="a"><strong>Ideal:</strong> "Both read the same localStorage on load and last-writer-wins on save, so one tab's session list could clobber the other's (no locking, no <code>storage</code>-event sync). Today it's an edge case; fixes are listening to the <code>storage</code> event to reconcile, or moving to a backend with proper concurrency control."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q65. What if the user speaks a non-English language? <span class="lvl medium">Medium · WHAT-IF</span></div>
+        <div class="a"><strong>Ideal:</strong> "Recognition is hard-set to <code>en-US</code>, and the lexicons/grammar rules are English-only, so results would be poor/meaningless. I'd need per-language recognizer config and localized rule/lexicon sets — a real internationalisation effort, currently out of scope."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q66. What if localStorage is full or disabled? <span class="lvl medium">Medium · WHAT-IF</span></div>
+        <div class="a"><strong>Ideal:</strong> "<code>setItem</code> throws <code>QuotaExceededError</code>; today that isn't caught around <code>saveSession</code>, so it could bubble. I'd wrap writes in try/catch, surface a 'storage full' notice, and offer pruning/export. If storage is disabled entirely, reads fall back to defaults via <code>safeParse</code> but nothing persists."</div>
+        <div class="fu"><strong>Why asked:</strong> do you know the failure modes of your own persistence layer?</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q67. Why should I trust a score if you can't even measure pronunciation from audio? <span class="lvl expert">Expert · TRAP</span></div>
+        <div class="a"><strong>Ideal:</strong> "You shouldn't treat the pronunciation number as ground truth — and the UI says exactly that, labelling it 'estimated from text, not audio'. I chose transparency over false precision. The metrics that <em>are</em> real (WPM, fillers, structure) are clearly derived from the transcript+timing. Honesty about measurement limits is the trust mechanism."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q68. If I remove <code>text.ts</code>, what breaks and why? <span class="lvl medium">Medium · WHAT-IF</span></div>
+        <div class="a"><strong>Ideal:</strong> "The engine and grammar both import primitives (<code>words</code>, <code>sentences</code>, <code>clamp</code>, <code>countBy</code>, <code>syllables</code>) from it, so analysis collapses. It's the shared foundation of the domain layer — high fan-in, which is why it's tiny and pure."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q69. Why is the bundle 600 kB for such a small app? <span class="lvl medium">Medium · CROSS</span></div>
+        <div class="a"><strong>Ideal:</strong> "Recharts (and its D3 dependencies) dominate, and it's currently in the main chunk even though charts only appear on the report/dashboard screens. Fix: lazy-load those screens; the home/speaking flow then ships almost none of it."</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q70. Principal-level: critique your own architecture. <span class="lvl principal">Principal</span></div>
+        <div class="a"><strong>Ideal:</strong> "Strengths: clean layering, a pure testable core, honest UX, graceful degradation. Weaknesses I'd prioritise: (1) the client-side key is a security boundary I traded away — fix with a proxy; (2) <code>App.tsx</code> is a god component mixing state, orchestration and view — extract a session hook + router; (3) hidden side-effect coupling (<code>gamification → storage</code>) hurts testability — invert the dependency; (4) no tests/CI and magic-number scoring constants — extract a tuning module and pin behaviour with tests. None are architectural dead-ends; they're a prioritised backlog with clear ROI."</div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 19 ===================== -->
+    <section class="section" id="s19">
+      <h1><span class="badge">19</span> Live Coding Questions</h1>
+      <p>Exercises derived directly from this codebase. Each states the task, the expected approach, and a reference solution consistent with the existing style.</p>
+
+      <h3>LC1. Word-frequency &amp; top-N repeated words <span class="lvl easy">Easy</span></h3>
+      <p><strong>Task:</strong> Given a transcript, return the top 3 words (length &gt; 3) by frequency. (This is exactly what <code>analyzeVocabulary</code> does.)</p>
+<pre><code class="language-typescript">function topRepeated(text: string, n = 3) {
+  const counts = new Map&lt;string, number&gt;();
+  for (const w of text.toLowerCase().match(/[a-z']+/g) ?? []) {
+    if (w.length &gt; 3) counts.set(w, (counts.get(w) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) =&gt; b[1] - a[1])
+    .slice(0, n)
+    .map(([word, count]) =&gt; ({ word, count }));
+}</code></pre>
+      <p><strong>Discussion:</strong> Map for O(1) counting; sort is O(k log k) over unique words. Interviewers probe: tokenisation choice, tie-breaking, and why not sort the raw array.</p>
+
+      <h3>LC2. Words-per-minute with a safe divisor <span class="lvl easy">Easy</span></h3>
+      <p><strong>Task:</strong> Compute WPM from word count and seconds, avoiding divide-by-zero.</p>
+<pre><code class="language-typescript">const wpm = Math.round(totalWords / Math.max(seconds / 60, 1 / 60));</code></pre>
+      <p><strong>Follow-up:</strong> Why clamp the divisor rather than special-case <code>seconds === 0</code>? (One expression, no branch, always defined.)</p>
+
+      <h3>LC3. A pluggable rule engine (Strategy) <span class="lvl medium">Medium</span></h3>
+      <p><strong>Task:</strong> Design a grammar checker that's easy to extend without editing logic — then add a rule. (Mirrors <code>grammar.ts</code>.)</p>
+<pre><code class="language-typescript">interface Rule { test: RegExp; fix: (s: string) =&gt; string; rule: string; }
+const RULES: Rule[] = [
+  { test: /\b(should|could|would)\s+of\b/i,
+    fix: s =&gt; s.replace(/\b(should|could|would)\s+of\b/gi, "$1 have"),
+    rule: "Modal + have" },
+];
+function check(text: string) {
+  const out: {original:string; corrected:string; rule:string}[] = [];
+  for (const s of text.split(/(?&lt;=[.!?])\s+/)) {
+    for (const r of RULES) {
+      if (r.test.test(s)) {
+        const corrected = r.fix(s);
+        if (corrected.toLowerCase() !== s.toLowerCase())
+          out.push({ original: s, corrected, rule: r.rule });
+      }
+    }
+  }
+  return out;
+}</code></pre>
+      <p><strong>Expected talking points:</strong> open/closed principle, de-duplication with a <code>Set</code>, why regex over parsing, precision vs recall.</p>
+
+      <h3>LC4. Streak counter <span class="lvl medium">Medium</span></h3>
+      <p><strong>Task:</strong> Update a daily streak given the last-session date and today (mirrors <code>awardForSession</code>).</p>
+<pre><code class="language-typescript">function nextStreak(streak: number, last: Date | null, today: Date): number {
+  if (!last) return 1;
+  const ms = 864e5;
+  const d = Math.round(
+    (Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) -
+     Date.UTC(last.getFullYear(), last.getMonth(), last.getDate())) / ms);
+  if (d === 0) return streak;      // same day
+  if (d === 1) return streak + 1;  // consecutive
+  return 1;                        // gap → reset
+}</code></pre>
+      <p><strong>Trap:</strong> using raw <code>Date</code> subtraction (DST/timezones) instead of UTC-midnight normalisation.</p>
+
+      <h3>LC5. <code>React.lazy</code> the chart screens <span class="lvl medium">Medium</span></h3>
+      <p><strong>Task:</strong> Reduce first-load bundle by lazy-loading <code>ReportView</code>/<code>Dashboard</code>.</p>
+<pre><code class="language-typescript">const ReportView = React.lazy(() =&gt; import("./components/ReportView"));
+// ...
+{screen === "report" &amp;&amp; report &amp;&amp; (
+  &lt;Suspense fallback={&lt;div className="card center"&gt;Loading…&lt;/div&gt;}&gt;
+    &lt;ReportView ... /&gt;
+  &lt;/Suspense&gt;
+)}</code></pre>
+      <p><strong>Note:</strong> requires converting those components to default exports (they're currently named exports).</p>
+
+      <h3>LC6. Debounced autosave (design) <span class="lvl hard">Hard</span></h3>
+      <p><strong>Task:</strong> If sessions were saved on every keystroke of a manual transcript, debounce writes. Expected: a <code>useEffect</code> + <code>setTimeout</code> cleared on change, or a <code>useDebouncedCallback</code>; discuss trailing vs leading edge and cancellation on unmount.</p>
+    </section>
+
+    <!-- ===================== SECTION 20 ===================== -->
+    <section class="section" id="s20">
+      <h1><span class="badge">20</span> Resume Verification</h1>
+      <p>Claims you might put on a resume, checked against the code, with honest ratings and stronger wording.</p>
+      <table>
+        <thead><tr><th>Draft bullet</th><th>Verdict</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>"Built an AI-powered speaking coach"</td><td class="n" style="color:var(--warn)">Partly true</td><td>Core scoring is deterministic; AI is optional. Risk of overclaim (see Q62).</td></tr>
+          <tr><td>"Developed a deterministic NLP analysis engine in TypeScript"</td><td class="n" style="color:var(--good)">Accurate</td><td><code>engine.ts</code> + <code>grammar.ts</code> + <code>lexicons.ts</code> back this.</td></tr>
+          <tr><td>"Designed a scalable microservices backend"</td><td class="n" style="color:var(--bad)">False</td><td>No backend exists. Do NOT write this.</td></tr>
+          <tr><td>"Integrated OpenAI with graceful fallback"</td><td class="n" style="color:var(--good)">Accurate</td><td><code>enhanceWithLlm</code> returns <code>null</code> on failure; report still renders.</td></tr>
+          <tr><td>"Implemented real-time speech-to-text"</td><td class="n" style="color:var(--warn)">Needs nuance</td><td>Used the Web Speech API (didn't implement STT); say "integrated".</td></tr>
+          <tr><td>"Achieved 90%+ test coverage"</td><td class="n" style="color:var(--bad)">False</td><td>Only a manual smoke script exists.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>20.1 Stronger, defensible bullets</h2>
+      <ul>
+        <li>"Architected a client-only React 18 + TypeScript SPA whose <strong>pure, dependency-free analysis engine</strong> scores speech across 13 dimensions in O(n) time — fully offline and unit-testable."</li>
+        <li>"Designed a <strong>data-driven rule engine</strong> (Strategy pattern) for grammar detection and a discourse-marker structure analyser, keeping runtime dependencies to three."</li>
+        <li>"Integrated the browser <strong>Web Speech API</strong> behind a custom hook that handles Chrome's mid-speech auto-stop via a restart-on-<code>onend</code> pattern."</li>
+        <li>"Added an <strong>optional OpenAI enhancement</strong> with strict JSON-mode parsing and graceful degradation, so the product never depends on model availability."</li>
+        <li>"Identified and fixed a scoring integrity bug ('marks for silence') with a <code>MIN_SPEECH_WORDS</code> guard, verified across boundary cases."</li>
+      </ul>
+
+      <h2>20.2 Weak points to pre-empt (and your prepared answers)</h2>
+      <ul>
+        <li><strong>No tests/CI</strong> → "Engine is pure and smoke-tested; next step is Vitest + Actions." </li>
+        <li><strong>Client-side key</strong> → "Known high-sev gap; fix is a proxy (I can whiteboard it)."</li>
+        <li><strong>Heuristics, not ML</strong> → "Deliberate: cheap, offline, honest; LLM covers depth."</li>
+      </ul>
+    </section>
+
+
+    <!-- ===================== SECTION 21 ===================== -->
+    <section class="section" id="s21">
+      <h1><span class="badge">21</span> Mock Interview (Full Transcript)</h1>
+      <p>A single escalating interview — warm-up → deep dive → system design → cross-examination → behavioral —
+      with the answers a strong candidate would give. <strong>I</strong> = Interviewer, <strong>C</strong> = Candidate.</p>
+
+      <div class="callout note"><p><strong>I:</strong> Give me the 30-second version of your project.</p>
+      <p><strong>C:</strong> "SpeakX AI is a client-only React + TypeScript SPA that coaches spoken English. You pick a
+      GD or interview topic, speak against a timer while the browser transcribes you, and a deterministic
+      engine returns a scored coaching report — 13 dimensions, grammar fixes, words-per-minute, fillers,
+      structure — plus gamification and a progress dashboard. There's an optional LLM layer for richer prose,
+      but the app is fully functional without it."</p></div>
+
+      <p><strong>I:</strong> "Deterministic engine" — unpack that. What's actually computed?<br/>
+      <strong>C:</strong> WPM from words over actual speaking seconds; single-word fillers via a <code>Set</code> and multi-word
+      fillers via regex; vocabulary diversity as a type-token ratio; ten regex grammar rules; and structure
+      via discourse-marker lexicons. Everything is a pure function in <code>lib/analysis/engine.ts</code> returning a
+      typed <code>CoachReport</code>.</p>
+
+      <p><strong>I:</strong> Pure function — prove it's testable.<br/>
+      <strong>C:</strong> It imports no React and no DOM, so <code>scripts/smoke.ts</code> runs it in Node with a fixed transcript
+      and asserts WPM, filler counts, that grammar rules fire, and structure flags. That's also why unit tests
+      are the obvious next step.</p>
+
+      <p><strong>I:</strong> I typed nothing and still got a score once. Bug?<br/>
+      <strong>C:</strong> Yes — a real one I fixed. Base scores started high (confidence ~92), so silence scored well.
+      I added <code>MIN_SPEECH_WORDS = 12</code>; <code>handleFinish</code> checks <code>countSpokenWords</code> and, below the threshold,
+      routes to a 'no speech' screen without scoring, saving, or awarding XP. I also added <code>hasSufficientSpeech</code>
+      in the engine and verified 0/3/15-word cases.</p>
+
+      <p><strong>I:</strong> Why did you add the guard in the component, not the engine?<br/>
+      <strong>C:</strong> The engine stays a pure calculator — given input, it computes. The <em>policy</em> decision "don't
+      record a non-attempt" is an app concern, so it lives in <code>handleFinish</code>. I mirrored a check in the engine
+      too, so a future caller can't misuse it.</p>
+
+      <p><strong>I:</strong> Let's design v2 with accounts and cloud sync. Whiteboard it.<br/>
+      <strong>C:</strong> One stateless service. <code>/api/enhance</code> proxies OpenAI so the key is a server secret — that
+      closes my biggest security gap — with Redis for per-user rate limiting and caching keyed by transcript
+      hash. <code>/api/sessions</code> is CRUD over Postgres: <code>users</code> and <code>sessions(user_id, created_at, report JSONB,
+      overall_score)</code>, indexed on <code>(user_id, created_at)</code>. Auth via Google OAuth + short-lived JWT and an
+      httpOnly refresh cookie; row-level security. Keep the client engine for offline-first and sync sessions
+      opportunistically — AP with eventual consistency, since there are no concurrent writers to a record.</p>
+
+      <p><strong>I:</strong> Why AP and not strong consistency?<br/>
+      <strong>C:</strong> A user must always be able to record a session, even offline (availability). Their history is
+      single-writer, so a few seconds of cross-device staleness is harmless. Forcing CP would hurt UX for no
+      correctness benefit.</p>
+
+      <p><strong>I:</strong> Postgres over Mongo — defend it.<br/>
+      <strong>C:</strong> The report is already a document, so Mongo would work, but I want relational reporting —
+      averages, best/worst, trends per user — which is cleaner in SQL, plus JSONB gives me the document
+      flexibility anyway. Supabase would also hand me auth + row-level security cheaply.</p>
+
+      <p><strong>I:</strong> Cross-question: your grammar checker misses most errors. Why keep it?<br/>
+      <strong>C:</strong> It's high-precision on common ESL patterns with zero latency and cost, which is what instant
+      feedback needs. I traded recall for determinism deliberately; the LLM path covers depth. It's the right
+      tool for 'immediate, free, offline'.</p>
+
+      <p><strong>I:</strong> You call it "AI-powered" but scoring isn't AI.<br/>
+      <strong>C:</strong> Correct, and I wouldn't overclaim. Scoring is heuristics — cheap, offline, testable. The AI is
+      an optional enhancer for prose. I'd describe it exactly that way on a resume.</p>
+
+      <p><strong>I:</strong> Biggest weakness of the whole thing?<br/>
+      <strong>C:</strong> The client-side OpenAI key when AI is enabled — it's exposed in the browser. The fix is the
+      proxy I described. After that: no tests/CI, and the ~610&nbsp;kB bundle from Recharts, which I'd lazy-load.</p>
+
+      <p><strong>I:</strong> Tell me about working under ambiguity here.<br/>
+      <strong>C:</strong> The brief was a huge feature wishlist. I scoped an honest MVP: a working deterministic core
+      plus clearly-labelled estimates, rather than faking audio analysis. I documented what's real versus
+      aspirational so expectations stayed grounded — and I fixed the integrity bug the moment testing exposed it.</p>
+
+      <div class="callout tip"><p><strong>I:</strong> Good — you know your code and your trade-offs, and you don't oversell. That's what I look for.</p></div>
+    </section>
+
+    <!-- ===================== SECTION 22 ===================== -->
+    <section class="section" id="s22">
+      <h1><span class="badge">22</span> Cheat Sheet &amp; Top 100 Questions</h1>
+
+      <h2>22.1 Architecture in one breath</h2>
+      <p class="lead">Client-only React 18 + TS + Vite SPA · screen state-machine in <code>App.tsx</code> · pure domain
+      layer in <code>lib/</code> · persistence via localStorage repository · optional browser→OpenAI enhancement · no
+      backend/DB/auth/tests/CI.</p>
+
+      <h2>22.2 Files you must be able to name</h2>
+      <table>
+        <thead><tr><th>File</th><th>One-liner</th></tr></thead>
+        <tbody>
+          <tr><td><code>App.tsx</code></td><td>State machine + session orchestration (<code>handleFinish</code>)</td></tr>
+          <tr><td><code>lib/analysis/engine.ts</code></td><td><code>analyzeSpeech()</code> → <code>CoachReport</code>; <code>MIN_SPEECH_WORDS</code> guard</td></tr>
+          <tr><td><code>lib/analysis/grammar.ts</code></td><td>10 regex rules (Strategy)</td></tr>
+          <tr><td><code>lib/analysis/text.ts</code></td><td>words/sentences/syllables/clamp/countBy</td></tr>
+          <tr><td><code>lib/topics.ts</code></td><td>40 seeds × 4 difficulty frames</td></tr>
+          <tr><td><code>lib/gamification.ts</code></td><td>XP=level×100, streaks, 11 badges, insights</td></tr>
+          <tr><td><code>lib/storage.ts</code></td><td>Repository over 3 localStorage keys</td></tr>
+          <tr><td><code>lib/llm.ts</code></td><td>Optional OpenAI call + graceful fallback</td></tr>
+          <tr><td><code>hooks/useSpeechRecognition.ts</code></td><td>Web Speech API wrapper (restart-on-onend)</td></tr>
+          <tr><td><code>types.ts</code></td><td>All domain types + <code>DURATION_OPTIONS</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>22.3 "APIs" &amp; "tables"</h2>
+      <ul>
+        <li><strong>APIs consumed:</strong> Web Speech API (local STT); OpenAI Chat Completions (optional, <code>gpt-4o-mini</code>, JSON mode).</li>
+        <li><strong>"Tables" (localStorage):</strong> <code>speakx.sessions.v1</code> (Session[]), <code>speakx.gamification.v1</code> (GamificationState), <code>speakx.openai.key.v1</code> (string).</li>
+      </ul>
+
+      <h2>22.4 Numbers to remember</h2>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Runtime dependencies</td><td>3 (react, react-dom, recharts)</td></tr>
+          <tr><td>Grammar rules</td><td>10 (regex)</td></tr>
+          <tr><td>Score dimensions</td><td>13</td></tr>
+          <tr><td>Min words to score</td><td>12 (<code>MIN_SPEECH_WORDS</code>)</td></tr>
+          <tr><td>Ideal WPM (scoring)</td><td>130</td></tr>
+          <tr><td>XP to next level</td><td>level × 100</td></tr>
+          <tr><td>Badges</td><td>11</td></tr>
+          <tr><td>JS bundle</td><td>~610 kB raw / ~175 kB gzip</td></tr>
+          <tr><td>Engine complexity</td><td>O(n) time, O(w) space</td></tr>
+        </tbody>
+      </table>
+
+      <h2>22.5 Common mistakes to avoid in the interview</h2>
+      <ul>
+        <li>Claiming a backend/DB/auth/tests that don't exist.</li>
+        <li>Saying the scoring is "machine learning" — it's heuristics.</li>
+        <li>Proposing to hide the key in a client-side <code>.env</code> (still public).</li>
+        <li>Saying Redux/microservices/queues are needed — they're not, and saying so signals over-engineering.</li>
+        <li>Forgetting to volunteer trade-offs when defending a decision.</li>
+      </ul>
+
+      <h2>22.6 Top 100 Questions to Revise Before the Interview</h2>
+      <p class="small">Condensed prompts — expand each using the model answers in §18. Grouped for a fast final pass.</p>
+      <ol class="two-col">
+        <li>What does the app do in 30 seconds?</li>
+        <li>Deterministic engine vs. optional LLM — the split?</li>
+        <li>Why client-only? Trade-offs?</li>
+        <li>The three architectural layers?</li>
+        <li>Import direction and why it matters?</li>
+        <li>Why no backend, and when would you add one?</li>
+        <li>Sketch the v2 backend.</li>
+        <li>How does navigation work (state machine)?</li>
+        <li>Why no Redux/Context?</li>
+        <li>Explain <code>useSpeechRecognition</code>.</li>
+        <li>Why <code>useRef</code> for the recognizer?</li>
+        <li>Chrome auto-stop problem &amp; fix?</li>
+        <li>Stale-closure avoidance in the timer?</li>
+        <li>What re-renders on a tick?</li>
+        <li>Why StrictMode matters here?</li>
+        <li>How would you code-split?</li>
+        <li>Error Boundary — risk &amp; fix?</li>
+        <li><code>DURATION_OPTIONS</code> / <code>Duration</code> type trick?</li>
+        <li>Where are discriminated unions used?</li>
+        <li>Which strict flags &amp; why?</li>
+        <li>How is the optional LLM field typed?</li>
+        <li>How is WPM computed + edge case?</li>
+        <li>Filler detection (Set vs regex)?</li>
+        <li>Vocabulary diversity (TTR) + its bias?</li>
+        <li>Grammar checker design; regex vs parser?</li>
+        <li>How are duplicate grammar issues avoided?</li>
+        <li>Structure detection + its weakness?</li>
+        <li>Confidence formula; the silence bug?</li>
+        <li>How does difficulty change scores?</li>
+        <li>What's the <code>void</code> dead code?</li>
+        <li>Data structures in the engine &amp; why?</li>
+        <li>Time/space complexity of <code>analyzeSpeech</code>?</li>
+        <li>Level-up loop complexity?</li>
+        <li>Syllable heuristic — exact?</li>
+        <li>How is data persisted/modelled?</li>
+        <li>localStorage risks?</li>
+        <li>Non-atomic multi-key writes — impact?</li>
+        <li>Postgres schema for v2?</li>
+        <li>Why <code>handleFinish</code> is async?</li>
+        <li>Keeping UI responsive during analysis?</li>
+        <li>LLM integration — why optional?</li>
+        <li>Reliable structured output — how?</li>
+        <li>Preventing LLM from duplicating metrics?</li>
+        <li>Prompt injection risk &amp; mitigations?</li>
+        <li>Token/cost estimate per session?</li>
+        <li>Biggest security issue + fix?</li>
+        <li>XSS exposure here?</li>
+        <li>Why CSRF/SQLi are N/A?</li>
+        <li>Scale to 1M users?</li>
+        <li>Where does Redis help?</li>
+        <li>Do you need microservices/queues?</li>
+        <li>Dockerise or not?</li>
+        <li>CAP choice for sync?</li>
+        <li>DB selection reasoning?</li>
+        <li>Current bottlenecks?</li>
+        <li>How is it tested (honestly)?</li>
+        <li>First 5 unit tests?</li>
+        <li>Git workflow?</li>
+        <li>CI/CD you'd add?</li>
+        <li>Functional setState — why?</li>
+        <li><code>??</code> vs <code>||</code>?</li>
+        <li><code>as const</code> — where critical?</li>
+        <li>A bug you fixed (STAR)?</li>
+        <li>A trade-off you'd defend?</li>
+        <li>Quality without QA?</li>
+        <li>Disagree-and-commit on Redux?</li>
+        <li>"AI-powered" but not AI — respond.</li>
+        <li>Grammar checker "useless" — rebut.</li>
+        <li>Two tabs at once — what happens?</li>
+        <li>Non-English speech — what happens?</li>
+        <li>localStorage full/disabled?</li>
+        <li>Trust a score without audio?</li>
+        <li>Remove <code>text.ts</code> — blast radius?</li>
+        <li>Why 600 kB bundle?</li>
+        <li>Critique your own architecture (Principal).</li>
+        <li>Why embed topic+report in a session?</li>
+        <li>Denormalisation trade-offs?</li>
+        <li>How does the streak reset logic work?</li>
+        <li>How are badges unlocked/deduped?</li>
+        <li>How are cross-session insights computed?</li>
+        <li>Why newest-first (<code>unshift</code>) storage?</li>
+        <li>How does the dashboard build trends?</li>
+        <li>Why Recharts; alternatives?</li>
+        <li>Why Vite over CRA/Webpack?</li>
+        <li>How does <code>safeParse</code> protect reads?</li>
+        <li>What happens on OpenAI 429?</li>
+        <li>Why JSON mode isn't enough alone?</li>
+        <li>How would you add i18n?</li>
+        <li>How to move analysis to a Web Worker?</li>
+        <li>How to prune old sessions?</li>
+        <li>How to add a schema version/migration?</li>
+        <li>How to make <code>awardForSession</code> pure?</li>
+        <li>Which patterns are present vs absent?</li>
+        <li>Facade — where?</li>
+        <li>Adapter — where (two places)?</li>
+        <li>Strategy — where (two places)?</li>
+        <li>Repository — where?</li>
+        <li>What's your #1 refactor?</li>
+        <li>What would you build with one more week?</li>
+        <li>How do you measure "improvement" over time?</li>
+        <li>What makes this honest/trustworthy to users?</li>
+        <li>If this had 100k paying users, top 3 priorities?</li>
+      </ol>
+
+      <hr/>
+      <p class="small center">End of handbook · Every claim herein is grounded in the source of
+      <code>RRNauhwar/GD-IMPROVEMENT-APP</code>; absent capabilities are marked <span class="tag missing">NOT PRESENT</span>.
+      Scores: Architecture 7.5 · Scalability 7.0 · Security 5.5 · Maintainability 7.5 · Code Quality 7.5 ·
+      Interview-Readiness 9.0 (≈ 7.3 overall as an MVP).</p>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "neutral",
+        flowchart: { htmlLabels: true, useMaxWidth: true },
+        sequence: { useMaxWidth: true },
+        er: { useMaxWidth: true },
+      });
+      if (window.hljs) hljs.highlightAll();
+    </script>
+  </body>
+</html>
