@@ -467,6 +467,18 @@ export interface AnalyzeInput {
   actualSpeakingSec: number;
 }
 
+/** Minimum number of real words required before we will score a session. */
+export const MIN_SPEECH_WORDS = 12;
+
+/** How many actual words were spoken (used to reject empty/near-empty attempts). */
+export function countSpokenWords(transcript: string): number {
+  return words(transcript).length;
+}
+
+export function hasSufficientSpeech(transcript: string): boolean {
+  return countSpokenWords(transcript) >= MIN_SPEECH_WORDS;
+}
+
 export function analyzeSpeech(input: AnalyzeInput): CoachReport {
   const { transcript, difficulty, actualSpeakingSec } = input;
   const effectiveSec = Math.max(actualSpeakingSec, 1);

@@ -8,7 +8,11 @@ import type {
   SessionMode,
   Topic,
 } from "./types";
-import { analyzeSpeech } from "./lib/analysis/engine";
+import {
+  analyzeSpeech,
+  countSpokenWords,
+  MIN_SPEECH_WORDS,
+} from "./lib/analysis/engine";
 import { SetupScreen } from "./components/SetupScreen";
 import { SpeakingScreen } from "./components/SpeakingScreen";
 import { ReportView } from "./components/ReportView";
@@ -25,7 +29,13 @@ import {
 import { awardForSession, buildInsights, levelProgress, type XpResult } from "./lib/gamification";
 import { applyEnhancement, enhanceWithLlm } from "./lib/llm";
 
-type Screen = "home" | "speaking" | "report" | "dashboard" | "settings";
+type Screen =
+  | "home"
+  | "speaking"
+  | "report"
+  | "dashboard"
+  | "settings"
+  | "nospeech";
 
 interface ActiveConfig {
   topic: Topic;
@@ -46,6 +56,7 @@ export default function App() {
   const [insights, setInsights] = useState<string[]>([]);
   const [xp, setXp] = useState<XpResult | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
+  const [spokenWords, setSpokenWords] = useState(0);
 
   const prog = useMemo(() => levelProgress(game), [game]);
 
@@ -56,6 +67,15 @@ export default function App() {
 
   const handleFinish = async (transcript: string, actualSpeakingSec: number) => {
     if (!active) return;
+
+    // Guard: don't score, save, or award XP unless the user actually spoke.
+    const wordCount = countSpokenWords(transcript);
+    if (wordCount < MIN_SPEECH_WORDS) {
+      setSpokenWords(wordCount);
+      setScreen("nospeech");
+      return;
+    }
+
     setAnalyzing(true);
 
     const base = analyzeSpeech({
@@ -116,38 +136,53 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="topbar">
-        <div className="brand">
-          <span className="dot" />
-          SpeakX&nbsp;AI
-          <span className="small muted" style={{ fontWeight: 400 }}>· GD Improvement</span>
-        </div>
-        <div className="nav">
-          <span className="pill">Lv {game.level}</span>
-          <span className="pill" title="XP toward next level">
-            ⚡ {prog.current}/{prog.needed}
+      <header className="topbar">
+        <button className="brand" onClick={() => setScreen("home")}>
+          <span className="logo">S</span>
+          <span className="brand-name">
+            SpeakX<span className="brand-accent">AI</span>
           </span>
-          <span className="pill">🔥 {game.streakDays}d</span>
+        </button>
+
+        <nav className="nav">
           <button
-            className={screen === "home" ? "active" : ""}
+            className={`tab ${screen === "home" || screen === "speaking" ? "active" : ""}`}
             onClick={() => setScreen("home")}
           >
-            Practice
+            🎤 Practice
           </button>
           <button
-            className={screen === "dashboard" ? "active" : ""}
+            className={`tab ${screen === "dashboard" ? "active" : ""}`}
             onClick={() => setScreen("dashboard")}
           >
-            Dashboard
+            📈 Progress
           </button>
           <button
-            className={screen === "settings" ? "active" : ""}
+            className={`tab ${screen === "settings" ? "active" : ""}`}
             onClick={() => setScreen("settings")}
           >
-            ⚙
+            ⚙️
           </button>
+        </nav>
+
+        <div className="stats-cluster">
+          <div className="stat-pill">
+            <span className="stat-pill-label">Level</span>
+            <span className="stat-pill-value">{game.level}</span>
+          </div>
+          <div className="stat-pill xp" title="XP toward next level">
+            <div className="xp-bar">
+              <div className="xp-fill" style={{ width: `${prog.pct}%` }} />
+            </div>
+            <span className="stat-pill-value small">
+              {prog.current}/{prog.needed} XP
+            </span>
+          </div>
+          <div className="stat-pill">
+            <span className="stat-pill-value">🔥 {game.streakDays}</span>
+          </div>
         </div>
-      </div>
+      </header>
 
       {analyzing && (
         <div className="card center">
@@ -196,6 +231,39 @@ export default function App() {
 
       {!analyzing && screen === "settings" && (
         <Settings onClose={() => setScreen("home")} />
+      )}
+
+      {!analyzing && screen === "nospeech" && (
+        <div className="empty-state card">
+          <div className="empty-emoji">🤫</div>
+          <h2>I didn't catch enough to coach you</h2>
+          <p className="muted">
+            {spokenWords === 0
+              ? "No speech was detected."
+              : `I only picked up ${spokenWords} word${spokenWords === 1 ? "" : "s"}.`}{" "}
+            You need at least {MIN_SPEECH_WORDS} words for a fair, honest report —
+            so no score or XP was recorded for this attempt.
+          </p>
+          <ul className="tips">
+            <li>Allow microphone access, then speak clearly and continuously.</li>
+            <li>
+              Live transcription works best in <b>Chrome</b> or <b>Edge</b>. In other
+              browsers, type what you said in the box before finishing.
+            </li>
+            <li>Don't finish until you actually see your words in the transcript.</li>
+          </ul>
+          <div className="row-actions mt-lg">
+            <button
+              className="primary"
+              onClick={() => active && setScreen("speaking")}
+            >
+              🎤 Try again
+            </button>
+            <button className="ghost" onClick={() => setScreen("home")}>
+              Pick a new topic
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
